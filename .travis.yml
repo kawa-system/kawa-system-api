@@ -8,8 +8,7 @@ env:
 addons:
     sonarcloud:
         organization: kawa-system
-        token:
-            secure: '**************************'
+        token: secure: '**************************'
 
 script:
     - mvn clean install
