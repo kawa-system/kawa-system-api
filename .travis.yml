@@ -12,4 +12,5 @@ addons:
             secure: '**************************'
 
 script:
-    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=kawa-system_kawa-system-api
+    - mvn clean install
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
