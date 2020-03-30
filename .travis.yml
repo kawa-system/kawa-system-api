@@ -1,0 +1,15 @@
+language: java
+jdk: oraclejdk11
+
+env:
+    global:
+        secure: C2Sw1S/Zu9XbGeTyKeWPwS7HiYQ+VX8YPKRqgc6dMpcotDPxv4x1Jy6i3ZegHMLNn+LhFAGlQIlNbvoOshRzhkxxnkPz+OYmZ3DKyZMc2muDiSOSTbDt5W+4Cg9EfkMlMNzQWgiMjq6ZhhUf88JMHjSb8desK3GlCLDNQgySwdOURWPOklaeG5wEWBUA5TNMQtBKgZX40xBMOxkYXYXdpBI4ofZNR1kT/405jRaXQXPHVT38HbP2JUTs6MsiqAFsTHx2OelWNDcybrBARjPGaAHP/X5G5C/zbdkMX6+uZXck0YR+8fbuGmze7/ubOVe+zrT+ZTiFIlDrti953a15MkzmxvDHfy0rW0mmCPqWfEce9FCZVcQnf03ZfwX1cOGElc0BMRTKTae8U337ZbZTK5fRKUTMm6SDtygtSJHNbb5QnEONwmbNrf8GtyRUEEj0znhHZewIIWrzGkAsW0teGW10It/TTX6tt3FzkGlJQkWGC7xSTn5scThNiXmnrfIbtfK1KCArv/4a8fdhZCFSI4u87qJ4hkhQHEGB8PwAI7RLw5C4BMe0xC0NJmuv8dVzW2V+7HY7sxdwtz3zlmhQvN6lilqTx10UefN/ooJrg+cNeptpTEkyjLn9p7gmt69CeWzX7QNAEJWTZPwMtIGuqL/tYx/i0eALUo6LUHUHvts=
+
+addons:
+    sonarcloud:
+        organization: kawa-system
+        token: secure: '**************************'
+
+script:
+    - mvn clean install
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.projectKey=kawa-system_kawa-system-api
