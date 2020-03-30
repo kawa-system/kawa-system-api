@@ -12,18 +12,26 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
+/**
+ * Unit Test Class dedicated to check {@link KawaSystemApiApplication}.
+ *
+ * @author <a href="https://github.com/old-papa-bear">Nicolas "Papa Bear" ROLLE</a>
+ * @version 0.1.0 hydrogen
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public final class KawaSystemApiApplicationTests {
 
-    // bind the above RANDOM_PORT
+    /** Local Server Port. */
     @LocalServerPort
     private int port;
 
+    /** Rest Template. */
     @Autowired
     private TestRestTemplate restTemplate;
 
     /**
-     * Test Service Hello.
+     * Unit Test used to validate {@link KawaSystemApiApplication#hello(String)}
+     * @since 0.1.0 hydrogen
      */
     @Test
     @DisplayName("[GET /hello] Nominal Case")
@@ -43,7 +51,6 @@ public final class KawaSystemApiApplicationTests {
                         + "/hello?name=Test") //$NON-NLS-1$
                     .toString(), String.class);
 
-        //Verify request succeed
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals("Hello Test!", //$NON-NLS-1$
                 response.getBody());
