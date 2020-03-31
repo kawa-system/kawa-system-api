@@ -33,15 +33,4 @@ public class KawaSystemApiApplication {
         SpringApplication.run(KawaSystemApiApplication.class, args);
     }
 
-    /**
-     * Hello World Service.
-     * @param name The name to display.
-     * @return The response.
-     * @since 0.1.0 hydrogen
-     */
-    @GetMapping("/hello")
-    public static String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name); //$NON-NLS-1$
-    }
-
 }
