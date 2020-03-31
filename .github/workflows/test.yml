@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Run Unit Tests
 
 on: push
 
@@ -14,5 +14,5 @@ jobs:
               with:
                   java-version: 11
 
-            - name: Compile with Maven
-              run: mvn clean instal --quiet
+            - name: Test with Maven
+              run: mvn test --quiet
