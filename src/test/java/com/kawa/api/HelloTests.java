@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
  * @version 0.1.0 hydrogen
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public final class KawaSystemApiApplicationTests {
+public final class HelloTests {
 
     /** Local Server Port. */
     @LocalServerPort
@@ -30,13 +30,12 @@ public final class KawaSystemApiApplicationTests {
     private TestRestTemplate restTemplate;
 
     /**
-     * Unit Test used to validate {@link KawaSystemApiApplication#hello(String)}
+     * Unit Test used to validate {@link HelloController#hello(String)}
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[GET /hello] Nominal Case")
-    public void testHello() throws Exception {
-        /* Nominal Case : Default Name. */
+    @DisplayName("[GET /hello] Nominal Case - Without name")
+    public void testHelloWithoutName() throws Exception {
         ResponseEntity<String> response = this.restTemplate.getForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
                         + "/hello").toString(), String.class); //$NON-NLS-1$
@@ -44,9 +43,16 @@ public final class KawaSystemApiApplicationTests {
         Assertions.assertEquals(200, response.getStatusCodeValue());
 	    Assertions.assertEquals("Hello World!", //$NON-NLS-1$
 	            response.getBody());
+    }
 
-        /* Nominal Case : Test Name. */
-	    response = this.restTemplate.getForEntity(
+    /**
+     * Unit Test used to validate {@link HelloController#hello(String)}
+     * @since 0.1.0 hydrogen
+     */
+    @Test
+    @DisplayName("[GET /hello] Nominal Case - With name")
+    public void testHelloWithName() throws Exception {
+	ResponseEntity<String> response = this.restTemplate.getForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
                         + "/hello?name=Test") //$NON-NLS-1$
                     .toString(), String.class);
@@ -54,6 +60,6 @@ public final class KawaSystemApiApplicationTests {
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals("Hello Test!", //$NON-NLS-1$
                 response.getBody());
-	}
+    }
 
 }
