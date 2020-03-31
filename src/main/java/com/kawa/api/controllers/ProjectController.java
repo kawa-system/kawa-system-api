@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProjectController {
 
     /**
-     * Project Service.
+     * Project creation.
+     * @param newProject project to create.
      * @return The response.
      * @since 0.1.0 hydrogen
      */
