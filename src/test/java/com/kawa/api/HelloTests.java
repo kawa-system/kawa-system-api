@@ -13,7 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Unit Test Class dedicated to check {@link KawaSystemApiApplication}.
+ * Unit Test Class dedicated to check {@link HelloController}.
  *
  * @author <a href="https://github.com/old-papa-bear">Nicolas "Papa Bear" ROLLE</a>
  * @version 0.1.0 hydrogen

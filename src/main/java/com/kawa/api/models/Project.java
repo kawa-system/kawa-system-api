@@ -1,5 +1,11 @@
 package com.kawa.api.models;
 
+/**
+ * ProjectModel.
+ *
+ * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
+ * @version 0.1.0 hydrogen
+ */
 public class Project {
     private final String uuid;
     private String name;

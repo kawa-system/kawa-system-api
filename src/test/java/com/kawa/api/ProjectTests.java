@@ -13,9 +13,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Unit Test Class dedicated to check {@link KawaSystemApiApplication}.
+ * Unit Test Class dedicated to check {@link ProjectController}.
  *
- * @author <a href="https://github.com/old-papa-bear">Nicolas "Papa Bear" ROLLE</a>
+ * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
  * @version 0.1.0 hydrogen
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
