@@ -43,12 +43,37 @@ public final class ProjectTests {
                         + "/project").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
-	    Assertions.assertEquals("TestID", //$NON-NLS-1$
-	            response.getBody().getUuid());
-	    Assertions.assertEquals("TestName", //$NON-NLS-1$
-	            response.getBody().getName());
-	    Assertions.assertEquals("TestDescription", //$NON-NLS-1$
-	            response.getBody().getDescription());
+        Assertions.assertEquals("TestID", //$NON-NLS-1$
+                response.getBody().getUuid());
+        Assertions.assertEquals("TestName", //$NON-NLS-1$
+                response.getBody().getName());
+        Assertions.assertEquals("TestDescription", //$NON-NLS-1$
+                response.getBody().getDescription());
+    }
+
+    /**
+     * Unit Test used to validate {@link ProjectController#create(Project)}
+     * @since 0.1.0 hydrogen
+     */
+    @Test
+    @DisplayName("[POST /project] Nominal Case - All data sent through setters")
+    public void testProjectCreationWithSetters() throws Exception {
+        Project project = new Project("TestID",
+                "TestName",
+                "TestDescription");
+        project.setDescription("RealTestDescription");
+        project.setName("RealTestName");
+        ResponseEntity<Project> response = this.restTemplate.postForEntity(
+                new URL("http://localhost:" + this.port //$NON-NLS-1$
+                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+
+        Assertions.assertEquals(200, response.getStatusCodeValue());
+        Assertions.assertEquals("TestID", //$NON-NLS-1$
+                response.getBody().getUuid());
+        Assertions.assertEquals("RealTestName", //$NON-NLS-1$
+                response.getBody().getName());
+        Assertions.assertEquals("RealTestDescription", //$NON-NLS-1$
+                response.getBody().getDescription());
     }
 
     /**
