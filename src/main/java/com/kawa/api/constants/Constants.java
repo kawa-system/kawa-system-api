@@ -16,6 +16,9 @@ public final class Constants {
     /** Global Serial Unique Version ID. */
     public static final long SUID = 0x01_00_0001_00000000L;
 
+    /** Default Maximum length. */
+    public static final int DEFAULT_MAXIMUM_LENGTH = 4096;
+
     /**
      * Constructor.
      * <i>As the purpose of this <code>class</code> is to provide static fields
