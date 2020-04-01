@@ -8,7 +8,7 @@ package com.kawa.api.constants;
  * to the project.
  * <hr>
  *
- * @since 0.1.0 hydrogen
+ * @version 0.1.0 hydrogen
  * @author Nicolas "Papa Bear" ROLLE
  */
 public final class Constants {
