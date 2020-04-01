@@ -15,6 +15,10 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<sonar.projectKey>kawa-system_kawa-system-api</sonar.projectKey>
+		<sonar.organization>kawa-system</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>a95adeef973a4d0af018d0f07d1cb6cffb69c3af</sonar.login>
 	</properties>
 
 	<dependencies>
