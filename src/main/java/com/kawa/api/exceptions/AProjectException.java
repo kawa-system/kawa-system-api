@@ -60,6 +60,33 @@ public abstract class AProjectException extends Exception {
     }
 
     /**
+     * Error : Project's Name is required !
+     * <hr>
+     *
+     * @since 0.1.0 hydrogen
+     * @author Nicolas "Papa Bear" ROLLE
+     */
+    @ResponseStatus(
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's name is required !")
+    public static final class NameRequired extends AProjectException {
+
+        /** Serial Version Unique ID. */
+        private static final long serialVersionUID = Constants.SUID;
+
+        /** Message Prefix. */
+        private static final String MSG = "The name's of a project is required";
+
+        /**
+         * Constructor.
+         * @since 0.1.0 hydrogn
+         */
+        public NameRequired() {
+            super(MSG);
+        }
+    }
+
+    /**
      * Error : Project's Name is too small !
      * <hr>
      *
