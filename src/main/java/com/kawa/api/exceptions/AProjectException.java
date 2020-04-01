@@ -40,8 +40,8 @@ public abstract class AProjectException extends Exception {
      * @author Nicolas "Papa Bear" ROLLE
      */
     @ResponseStatus(
-        code=HttpStatus.BAD_REQUEST,
-        reason="Project's name is too small !")
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's name is too small !")
     public static final class NameTooSmall extends AProjectException {
 
         /** Serial Version Unique ID. */
@@ -72,8 +72,8 @@ public abstract class AProjectException extends Exception {
      * @author Nicolas "Papa Bear" ROLLE
      */
     @ResponseStatus(
-        code=HttpStatus.BAD_REQUEST,
-        reason="Project's name is too long !")
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's name is too long !")
     public static final class NameTooLong extends AProjectException {
 
         /** Serial Version Unique ID. */
