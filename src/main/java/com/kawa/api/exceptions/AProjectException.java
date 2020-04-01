@@ -133,7 +133,7 @@ public abstract class AProjectException extends Exception {
     @ResponseStatus(
         code = HttpStatus.BAD_REQUEST,
         reason = "Project's description is too long !")
-    public static final class ProjectDescriptionTooLong
+    public static final class DescriptionTooLong
         extends AProjectException {
 
         /** Serial Version Unique ID. */
@@ -151,7 +151,7 @@ public abstract class AProjectException extends Exception {
          * @param iInvalidSize The invalid size.
          * @since 0.1.0 hydrogn
          */
-        public ProjectDescriptionTooLong(final int iInvalidSize) {
+        public DescriptionTooLong(final int iInvalidSize) {
             super(MSG_PFX + iInvalidSize + MSG_SFX);
         }
     }
