@@ -14,13 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     /**
+     * Constructor.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    protected HelloController() {
+        super();
+    }
+
+    /**
      * Hello World Service.
      * @param name The name to display.
      * @return The response.
      * @since 0.1.0 hydrogen
      */
     @GetMapping("/hello")
-    public static String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public static String hello(
+        @RequestParam(value = "name", defaultValue = "World")
+        final String name) {
         return String.format("Hello %s!", name); //$NON-NLS-1$
     }
 

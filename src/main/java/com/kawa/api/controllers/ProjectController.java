@@ -31,8 +31,14 @@ public class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @PostMapping("/projects")
-    public static Project create(@RequestBody Project newProject) {
-        if (newProject.getUuid() == null) return new Project(UUID.randomUUID().toString(), newProject.getName(), newProject.getDescription());
+    public static Project create(
+        @RequestBody final Project newProject) {
+
+        if (newProject.getUuid() == null) {
+            return new Project(UUID.randomUUID().toString(),
+                newProject.getName(),
+                newProject.getDescription());
+        }
 
         return newProject;
     }
