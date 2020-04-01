@@ -18,7 +18,7 @@ public class KawaSystemApiApplication {
      * Constructor.
      * @since 0.1.0 hydrogen
      */
-    public KawaSystemApiApplication() {
+    protected KawaSystemApiApplication() {
         super();
     }
 
