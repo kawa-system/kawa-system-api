@@ -34,13 +34,13 @@ public final class ProjectTests {
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[POST /project] Nominal Case - All data sent")
+    @DisplayName("[POST /projects] Nominal Case - All data sent")
     public void testProjectCreationWithAllDataSent() throws Exception {
         Project project = new Project("TestID", "TestName", "TestDescription");
 
         ResponseEntity<Project> response = this.restTemplate.postForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
-                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+                        + "/projects").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals("TestID", //$NON-NLS-1$
@@ -56,7 +56,7 @@ public final class ProjectTests {
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[POST /project] Nominal Case - All data sent through setters")
+    @DisplayName("[POST /projects] Nominal Case - All data sent through setters")
     public void testProjectCreationWithSetters() throws Exception {
         Project project = new Project("TestID",
                 "TestName",
@@ -65,7 +65,7 @@ public final class ProjectTests {
         project.setName("RealTestName");
         ResponseEntity<Project> response = this.restTemplate.postForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
-                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+                        + "/projects").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals("TestID", //$NON-NLS-1$
@@ -81,13 +81,13 @@ public final class ProjectTests {
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[POST /project] Nominal Case - Without description")
+    @DisplayName("[POST /projects] Nominal Case - Without description")
     public void testProjectCreationWithoutDescription() throws Exception {
         Project project = new Project("TestID", "TestName", null);
 
         ResponseEntity<Project> response = this.restTemplate.postForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
-                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+                        + "/projects").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals("TestID", //$NON-NLS-1$
@@ -102,13 +102,13 @@ public final class ProjectTests {
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[POST /project] Nominal Case - Without UUID")
+    @DisplayName("[POST /projects] Nominal Case - Without UUID")
     public void testProjectCreationWithoutUuid() throws Exception {
         Project project = new Project(null, "TestName", "TestDescription");
 
         ResponseEntity<Project> response = this.restTemplate.postForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
-                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+                        + "/projects").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertNotNull(response.getBody().getUuid());
@@ -123,13 +123,13 @@ public final class ProjectTests {
      * @since 0.1.0 hydrogen
      */
     @Test
-    @DisplayName("[POST /project] Nominal Case - Without UUID and description")
+    @DisplayName("[POST /projects] Nominal Case - Without UUID and description")
     public void testProjectCreationWithoutUuidAndDescription() throws Exception {
         Project project = new Project(null, "TestName", null);
 
         ResponseEntity<Project> response = this.restTemplate.postForEntity(
                 new URL("http://localhost:" + this.port //$NON-NLS-1$
-                        + "/project").toString(), project, Project.class); //$NON-NLS-1$
+                        + "/projects").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertNotNull(response.getBody().getUuid());
