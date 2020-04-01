@@ -1,4 +1,4 @@
-package com.kawa.api.controller;
+package com.kawa.api.controllers;
 
 import com.kawa.api.models.Project;
 import java.util.UUID;
