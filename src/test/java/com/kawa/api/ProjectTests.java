@@ -33,7 +33,7 @@ public final class ProjectTests {
     private TestRestTemplate restTemplate;
 
     /** HTTP Status Code : Success (200). */
-    private static final int STATUS_SUCCESS = 200;
+    private static final int STATUS_SUCCESS = 201;
     /** Default Project's ID. */
     private static final String DFT_ID = "default-id"; //$NON-NLS-1$
     /** Default Project's Name. */

@@ -2,6 +2,9 @@ package com.kawa.api.controllers;
 
 import com.kawa.api.models.Project;
 import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,16 +34,20 @@ public class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @PostMapping("/projects")
-    public static Project create(
+    public static ResponseEntity<Project> create(
         @RequestBody final Project newProject) {
 
+        if (newProject == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         if (newProject.getUuid() == null) {
-            return new Project(UUID.randomUUID().toString(),
+            return new ResponseEntity<Project>(
+                new Project(UUID.randomUUID().toString(),
                 newProject.getName(),
-                newProject.getDescription());
+                newProject.getDescription()), HttpStatus.CREATED);
         }
 
-        return newProject;
+        return new ResponseEntity<Project>(newProject, HttpStatus.CREATED);
     }
 
 }
