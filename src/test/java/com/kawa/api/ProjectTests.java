@@ -90,11 +90,11 @@ public final class ProjectTests {
                         + "/project").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
-	    Assertions.assertEquals("TestID", //$NON-NLS-1$
-	            response.getBody().getUuid());
-	    Assertions.assertEquals("TestName", //$NON-NLS-1$
-	            response.getBody().getName());
-	    Assertions.assertNull(response.getBody().getDescription());
+        Assertions.assertEquals("TestID", //$NON-NLS-1$
+                response.getBody().getUuid());
+        Assertions.assertEquals("TestName", //$NON-NLS-1$
+                response.getBody().getName());
+        Assertions.assertNull(response.getBody().getDescription());
     }
 
     /**
@@ -111,11 +111,11 @@ public final class ProjectTests {
                         + "/project").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
-	    Assertions.assertNotNull(response.getBody().getUuid());
-	    Assertions.assertEquals("TestName", //$NON-NLS-1$
-	            response.getBody().getName());
-	    Assertions.assertEquals("TestDescription", //$NON-NLS-1$
-	            response.getBody().getDescription());
+        Assertions.assertNotNull(response.getBody().getUuid());
+        Assertions.assertEquals("TestName", //$NON-NLS-1$
+                response.getBody().getName());
+        Assertions.assertEquals("TestDescription", //$NON-NLS-1$
+                response.getBody().getDescription());
     }
 
     /**
@@ -132,10 +132,10 @@ public final class ProjectTests {
                         + "/project").toString(), project, Project.class); //$NON-NLS-1$
 
         Assertions.assertEquals(200, response.getStatusCodeValue());
-	    Assertions.assertNotNull(response.getBody().getUuid());
-	    Assertions.assertEquals("TestName", //$NON-NLS-1$
-	            response.getBody().getName());
-	    Assertions.assertNull(response.getBody().getDescription());
+        Assertions.assertNotNull(response.getBody().getUuid());
+        Assertions.assertEquals("TestName", //$NON-NLS-1$
+                response.getBody().getName());
+        Assertions.assertNull(response.getBody().getDescription());
     }
 
 }
