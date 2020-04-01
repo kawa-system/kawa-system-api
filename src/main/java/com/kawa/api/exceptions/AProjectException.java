@@ -1,3 +1,5 @@
+package com.kawa.api.exceptions;
+
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
 
