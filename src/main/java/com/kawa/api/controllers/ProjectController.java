@@ -21,7 +21,7 @@ public class ProjectController {
      * @return The response.
      * @since 0.1.0 hydrogen
      */
-    @PostMapping("/project")
+    @PostMapping("/projects")
     public static Project create(@RequestBody Project newProject) {
         if (newProject.getUuid() == null) return new Project(UUID.randomUUID().toString(), newProject.getName(), newProject.getDescription());
 

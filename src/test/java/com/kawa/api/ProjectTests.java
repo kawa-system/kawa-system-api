@@ -55,7 +55,7 @@ public final class ProjectTests {
         try {
             return this.restTemplate.postForEntity(
                     new URL("http://localhost:" + this.port //$NON-NLS-1$
-                            + "/project").toString(), //$NON-NLS-1$
+                            + "/projects").toString(), //$NON-NLS-1$
                         oProject, Project.class);
         } catch (RestClientException rce) {
             Assertions.fail(rce);
