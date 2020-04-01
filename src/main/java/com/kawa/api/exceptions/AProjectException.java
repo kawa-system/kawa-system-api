@@ -123,4 +123,37 @@ public abstract class AProjectException extends Exception {
         }
     }
 
+    /**
+     * Error : Project's Description is too long !
+     * <hr>
+     *
+     * @since 0.1.0 hydrogen
+     * @author Nicolas "Papa Bear" ROLLE
+     */
+    @ResponseStatus(
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's description is too long !")
+    public static final class ProjectDescriptionTooLong
+        extends AProjectException {
+
+        /** Serial Version Unique ID. */
+        private static final long serialVersionUID = Constants.SUID;
+
+        /** Message Prefix. */
+        private static final String MSG_PFX = "The description's size [";
+        /** Message Suffix. */
+        private static final String MSG_SFX = "]is too long for a project."
+            + " The maximum expected is [" + Constants.DEFAULT_MAXIMUM_LENGTH
+            + "]";
+
+        /**
+         * Constructor.
+         * @param iInvalidSize The invalid size.
+         * @since 0.1.0 hydrogn
+         */
+        public ProjectDescriptionTooLong(final int iInvalidSize) {
+            super(MSG_PFX + iInvalidSize + MSG_SFX);
+        }
+    }
+
 }
