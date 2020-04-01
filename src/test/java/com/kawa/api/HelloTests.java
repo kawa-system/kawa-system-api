@@ -39,7 +39,7 @@ public final class HelloTests {
     private static final String NAME_NOM = "Jean Pierre"; //$NON-NLS-1$
 
     /** Result Prefix. */
-    private static final String RES_PFX = "Hello"; //$NON-NLS-1$
+    private static final String RES_PFX = "Hello "; //$NON-NLS-1$
     /** Result Suffix. */
     private static final String RES_SFX = "!"; //$NON-NLS-1$
 
