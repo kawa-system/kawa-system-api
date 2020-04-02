@@ -4,6 +4,8 @@ import com.kawa.api.exceptions.AProjectException.NameTooSmall;
 import com.kawa.api.exceptions.AProjectException.UUIDUsed;
 import com.kawa.api.models.Project;
 
+import org.owasp.encoder.Encode;
+
 import java.util.UUID;
 
 import com.kawa.api.constants.Constants;
@@ -79,7 +81,7 @@ public final class ProjectUtils {
         } else {
 
             try {
-                oCandidate = UUID.fromString(sCandidateUUID);
+                oCandidate = UUID.fromString(Encode.forJava(sCandidateUUID));
             } catch (IllegalArgumentException iae) {
                 throw new InvalidUUID(sCandidateUUID, iae);
             }
@@ -106,7 +108,7 @@ public final class ProjectUtils {
             throw new NameRequired();
         }
 
-       final String sTrimmed = sCandidateName.trim();
+       final String sTrimmed = Encode.forJava(sCandidateName).trim();
 
         if (sTrimmed.length() < ProjectConstants.NAME_MINIMUM_SIZE) {
             throw new NameTooSmall(sTrimmed.length());
@@ -132,7 +134,7 @@ public final class ProjectUtils {
             return "";
         }
 
-        final String sTrimmed = sCandidateDescription.trim();
+        final String sTrimmed = Encode.forJava(sCandidateDescription).trim();
 
         if (sTrimmed.length() > Constants.DEFAULT_MAXIMUM_LENGTH) {
             throw new DescriptionTooLong(sTrimmed.length());
