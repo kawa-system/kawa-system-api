@@ -1,10 +1,16 @@
 package com.kawa.api.utils;
 
 import com.kawa.api.exceptions.AProjectException.NameTooSmall;
+import com.kawa.api.exceptions.AProjectException.UUIDUsed;
+import com.kawa.api.models.Project;
+
+import java.util.UUID;
 
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
+import com.kawa.api.exceptions.AProjectException;
 import com.kawa.api.exceptions.AProjectException.DescriptionTooLong;
+import com.kawa.api.exceptions.AProjectException.InvalidUUID;
 import com.kawa.api.exceptions.AProjectException.NameRequired;
 import com.kawa.api.exceptions.AProjectException.NameTooLong;
 
@@ -36,6 +42,55 @@ public final class ProjectUtils {
     }
 
     /**
+     * Used to check & clean a given project candidate to a creation.
+     * @param oProject The candidate.
+     * @return A valid & clean project.
+     * @throws AProjectException if, at least, one requirement is violated.
+     */
+    public static Project checkProjectToCreate(
+        final Project oProject)
+        throws AProjectException {
+
+        if (oProject == null) {
+            throw new AProjectException.ProjectRequired();
+        }
+
+        return new Project(
+            checkUuidToCreate(oProject.getUuid()),
+            checkName(oProject.getName()),
+            checkDescription(oProject.getDescription()));
+
+    }
+
+    /**
+     * Used to check a given project's UUID for creation.
+     * @param sCandidateUUID The given project's UUID for creation.
+     * @return A valid UUID.
+     * @throws InvalidUUID if the given UUID is invalid.
+     * @throws UUIDUsed if the given UUID is already used.
+     */
+    private static String checkUuidToCreate(
+        final String sCandidateUUID)
+        throws InvalidUUID, UUIDUsed {
+        final UUID oCandidate;
+
+        if (sCandidateUUID == null) {
+            oCandidate = UUID.randomUUID();
+        } else {
+
+            try {
+                oCandidate = UUID.fromString(sCandidateUUID);
+            } catch (IllegalArgumentException iae) {
+                throw new InvalidUUID(sCandidateUUID, iae);
+            }
+        }
+
+        /* @TODO CHECK IF ALREADY EXISTS. */
+
+        return oCandidate.toString();
+    }
+
+    /**
      * Used to check a given project's name.
      * @param sCandidateName The given project's name.
      * @return A valid name.
@@ -43,7 +98,7 @@ public final class ProjectUtils {
      * @throws NameTooSmall if the given {@link Project} got a name too small.
      * @throws NameTooLong if the given {@link Project} got a name too long.
      */
-    public static String checkName(
+    private static String checkName(
         final String sCandidateName)
         throws NameRequired, NameTooSmall, NameTooLong {
 
@@ -69,7 +124,7 @@ public final class ProjectUtils {
      * @throws DescriptionTooLong if the given {@link Project} got a description
      * too long.
      */
-    public static String checkDescription(
+    private static String checkDescription(
         final String sCandidateDescription)
         throws DescriptionTooLong {
 
