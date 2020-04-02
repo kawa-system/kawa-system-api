@@ -67,7 +67,7 @@ public class ProjectController {
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> findAll() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(this.oProjectRepository.findAll(););
+        return ResponseEntity.status(HttpStatus.FOUND).body(this.oProjectRepository.findAll());
     }
 
 }
