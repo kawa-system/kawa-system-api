@@ -20,7 +20,7 @@ public final class Project {
      * @since 0.1.0 hydrogen
      */
     @Id
-    private final String uuid;
+    private String uuid;
 
     /**
      * Short <b>Name</b>.
@@ -41,6 +41,8 @@ public final class Project {
      * @since 0.1.0 hydrogen
      */
     private String description;
+
+    public Project() {}
 
     /**
      * Constructor.
@@ -88,7 +90,16 @@ public final class Project {
     }
 
     /**
-     * @param sName The new short name.
+     * @param uuid The UUID.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public void setUuid(final String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * @param name The new short name.
      * <hr>
      * @since 0.1.0 hydrogen
      */
@@ -98,7 +109,7 @@ public final class Project {
 
 
     /**
-     * @param sDescription The new description.
+     * @param description The new description.
      * <hr>
      * @since 0.1.0 hydrogen
      */
