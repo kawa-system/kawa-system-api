@@ -1,7 +1,8 @@
 package com.kawa.api.controllers;
 
+import com.kawa.api.exceptions.AProjectException;
 import com.kawa.api.models.Project;
-import java.util.UUID;
+import com.kawa.api.utils.ProjectUtils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class ProjectController {
     /**
      * Constructor.
      * <hr>
+     *
      * @since 0.1.0 hydrogen
      */
     protected ProjectController() {
@@ -29,25 +31,25 @@ public class ProjectController {
 
     /**
      * Project creation.
+     *
      * @param newProject project to create.
      * @return The response.
+     * @throws AProjectException
      * @since 0.1.0 hydrogen
      */
     @PostMapping("/projects")
     public static ResponseEntity<Project> create(
-        @RequestBody final Project newProject) {
+        @RequestBody final Project newProject)
+        throws AProjectException {
+        final Project oValidProject;
 
-        if (newProject == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        if (newProject.getUuid() == null) {
-            return new ResponseEntity<Project>(
-                new Project(UUID.randomUUID().toString(),
-                newProject.getName(),
-                newProject.getDescription()), HttpStatus.CREATED);
-        }
+        /* Check & Clean Project. */
+        oValidProject = ProjectUtils.checkProjectToCreate(newProject);
 
-        return new ResponseEntity<Project>(newProject, HttpStatus.CREATED);
+        /* @TODO Persist Project in mongo db.... */
+
+        /* Return new project as the resource representation. */
+        return ResponseEntity.status(HttpStatus.CREATED).body(oValidProject);
     }
 
 }
