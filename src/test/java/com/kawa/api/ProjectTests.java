@@ -130,11 +130,11 @@ public final class ProjectTests {
             "A created project CANNOT be null.");
 
         /* Assert project's attributes'. */
-        Assertions.assertEquals(oResponse.getBody().getUuid(), DFT_ID,
+        Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
             "The UUID of the project MUST be the proposed one.");
-        Assertions.assertEquals(oResponse.getBody().getName(), DFT_NAME,
+        Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one.");
-        Assertions.assertEquals(oResponse.getBody().getDescription(), DFT_DESC,
+        Assertions.assertEquals(DFT_DESC, oResponse.getBody().getDescription(),
             "The description of the project MUST be the proposed one.");
 
     }
@@ -170,9 +170,9 @@ public final class ProjectTests {
         /* Assert project's attributes'. */
         Assertions.assertNotNull(oResponse.getBody().getUuid(),
             "The UUID of the project CANNOT be null.");
-        Assertions.assertEquals(oResponse.getBody().getName(), DFT_NAME,
+        Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one.");
-        Assertions.assertEquals(oResponse.getBody().getDescription(), "",
+        Assertions.assertEquals("", oResponse.getBody().getDescription(),
             "The description of the project MUST be the proposed one.");
 
     }
@@ -208,11 +208,11 @@ public final class ProjectTests {
             "A created project CANNOT be null.");
 
         /* Assert project's attributes'. */
-        Assertions.assertEquals(oResponse.getBody().getUuid(), DFT_ID,
+        Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
             "The UUID of the project CANNOT be null.");
-        Assertions.assertEquals(oResponse.getBody().getName(), SET_NAME,
+        Assertions.assertEquals(SET_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one.");
-        Assertions.assertEquals(oResponse.getBody().getDescription(), SET_DESC,
+        Assertions.assertEquals(SET_DESC, oResponse.getBody().getDescription(),
             "The description of the project MUST be the proposed one.");
 
     }
