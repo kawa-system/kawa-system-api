@@ -33,6 +33,16 @@ public abstract class AProjectException extends Exception {
     }
 
     /**
+     * Constructor.
+     * @param sMessage The message.
+     * @param oCause The cause.
+     * @since 0.1.0 hydrogen
+     */
+    protected AProjectException(final String sMessage, final Throwable oCause) {
+        super(sMessage, oCause);
+    }
+
+    /**
      * Error : The Project is required.
      * <hr>
      *
@@ -57,6 +67,71 @@ public abstract class AProjectException extends Exception {
         public ProjectRequired() {
             super(MSG);
         }
+    }
+
+    /**
+     * Error : Project's UUDI is invalid !
+     * <hr>
+     *
+     * @since 0.1.0 hydrogen
+     * @author Nicolas "Papa Bear" ROLLE
+     */
+    @ResponseStatus(
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's UUID is invalid !")
+    public static final class InvalidUUID extends AProjectException {
+
+        /** Serial Version Unique ID. */
+        private static final long serialVersionUID = Constants.SUID;
+
+        /** Message Prefix. */
+        private static final String MSG_PFX = "The given UUID [";
+        /** Message Suffix. */
+        private static final String MSG_SFX =  "] is invalid.";
+
+        /**
+         * Constructor.
+         * @param sUUID Given UUID.
+         * @param iae The cause.
+         * @since 0.1.0 hydrogn
+         */
+        public InvalidUUID(
+            final String sUUID,
+            final IllegalArgumentException iae) {
+            super(MSG_PFX + sUUID + MSG_SFX, iae);
+        }
+
+    }
+
+    /**
+     * Error : Project's UUDI is already used !
+     * <hr>
+     *
+     * @since 0.1.0 hydrogen
+     * @author Nicolas "Papa Bear" ROLLE
+     */
+    @ResponseStatus(
+        code = HttpStatus.BAD_REQUEST,
+        reason = "Project's UUID is already used !")
+    public static final class UUIDUsed extends AProjectException {
+
+        /** Serial Version Unique ID. */
+        private static final long serialVersionUID = Constants.SUID;
+
+        /** Message Prefix. */
+        private static final String MSG_PFX = "The given UUID [";
+        /** Message Suffix. */
+        private static final String MSG_SFX =  "] is already used.";
+
+        /**
+         * Constructor.
+         * @param sUUID Given UUID.
+         * @since 0.1.0 hydrogn
+         */
+        public UUIDUsed(final String sUUID) {
+            super(MSG_PFX + sUUID + MSG_SFX);
+        }
+
     }
 
     /**
