@@ -59,11 +59,15 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(oValidProject);
     }
 
+    /**
+     * Return all projects.
+     *
+     * @return The response.
+     * @since 0.1.0 hydrogen
+     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Project>> findAll() {
-        List<Project> projects = this.oProjectRepository.findAll();
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(projects);
+        return ResponseEntity.status(HttpStatus.FOUND).body(this.oProjectRepository.findAll(););
     }
 
 }
