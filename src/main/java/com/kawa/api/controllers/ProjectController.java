@@ -47,7 +47,6 @@ public class ProjectController {
         /* Check & Clean Project. */
         oValidProject = ProjectUtils.checkProjectToCreate(newProject);
 
-        /* @TODO Persist Project in mongo db.... */
         this.oProjectRepository.save(oValidProject);
 
         /* Return new project as the resource representation. */
