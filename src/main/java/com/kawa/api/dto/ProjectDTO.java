@@ -37,24 +37,59 @@ public class ProjectDTO {
      */
     private String description;
 
-	public String getUuid() {
-		return uuid;
-	}
+    /**
+     * @return current UUID
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return current short name.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return current UUID
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public String getDescription() {
+        return this.description;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @param uuid The UUID.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public void setUuid(final String uuid) {
+        this.uuid = uuid;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @param name The new short name.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+
+    /**
+     * @param description The new description.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 
 }
