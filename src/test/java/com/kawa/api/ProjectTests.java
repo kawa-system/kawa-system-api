@@ -12,10 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
@@ -26,13 +23,8 @@ import org.springframework.web.client.RestClientException;
  * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
  * @version 0.1.0 hydrogen
  */
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public final class ProjectTests {
-
-    /** Local Server Port. */
-    @LocalServerPort
-    private int port;
-
+public final class ProjectTests extends AKawaTests {
+	
     /** Rest Template. */
     @Autowired
     private TestRestTemplate restTemplate;
@@ -344,6 +336,4 @@ public final class ProjectTests {
             "Too long description MUST generate a \"BAD REQUEST\" error.");
 
     }
-
-
 }

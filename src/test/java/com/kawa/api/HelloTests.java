@@ -20,14 +20,10 @@ import org.springframework.http.ResponseEntity;
  * @version 0.1.0 hydrogen
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public final class HelloTests {
+public final class HelloTests extends AKawaTests {
 
     /** HTTP Status Code : Success (200). */
     private static final int STATUS_SUCCESS = 200;
-
-    /** Local Server Port. */
-    @LocalServerPort
-    private int port;
 
     /** Rest Template. */
     @Autowired
