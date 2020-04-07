@@ -2,9 +2,8 @@ package com.kawa.api.controllers;
 
 import java.util.List;
 
-import com.kawa.api.dto.ProjectDTO;
 import com.kawa.api.exceptions.AProjectException;
-import com.kawa.api.models.Project;
+import com.kawa.api.models.ProjectDTO;
 import com.kawa.api.repositories.ProjectRepository;
 import com.kawa.api.utils.ProjectUtils;
 
@@ -28,10 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
- 
+
+    /** Mapper. */
     @Autowired
     private ModelMapper modelMapper;
 
+    /** Repository. */
     @Autowired
     private ProjectRepository oProjectRepository;
 
@@ -44,11 +45,11 @@ public class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Project> create(
+    public ResponseEntity<ProjectDTO> create(
         @RequestBody final ProjectDTO projectDTO)
         throws AProjectException {
-        Project newProject = modelMapper.map(projectDTO, Project.class);
-        final Project oValidProject;
+        ProjectDTO newProject = modelMapper.map(projectDTO, ProjectDTO.class);
+        final ProjectDTO oValidProject;
 
         /* Check & Clean Project. */
         oValidProject = ProjectUtils.checkProjectToCreate(newProject);
@@ -66,8 +67,9 @@ public class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Project>> findAll() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(this.oProjectRepository.findAll());
+    public ResponseEntity<List<ProjectDTO>> findAll() {
+        return ResponseEntity.status(HttpStatus.FOUND)
+            .body(this.oProjectRepository.findAll());
     }
 
 }

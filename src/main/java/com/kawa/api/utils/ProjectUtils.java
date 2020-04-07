@@ -2,7 +2,7 @@ package com.kawa.api.utils;
 
 import com.kawa.api.exceptions.AProjectException.NameTooSmall;
 import com.kawa.api.exceptions.AProjectException.UUIDUsed;
-import com.kawa.api.models.Project;
+import com.kawa.api.models.ProjectDTO;
 
 import org.owasp.encoder.Encode;
 
@@ -49,15 +49,15 @@ public final class ProjectUtils {
      * @return A valid & clean project.
      * @throws AProjectException if, at least, one requirement is violated.
      */
-    public static Project checkProjectToCreate(
-        final Project oProject)
+    public static ProjectDTO checkProjectToCreate(
+        final ProjectDTO oProject)
         throws AProjectException {
 
         if (oProject == null) {
             throw new AProjectException.ProjectRequired();
         }
 
-        return new Project(
+        return new ProjectDTO(
             checkUuidToCreate(oProject.getUuid()),
             checkName(oProject.getName()),
             checkDescription(oProject.getDescription()));
@@ -96,9 +96,9 @@ public final class ProjectUtils {
      * Used to check a given project's name.
      * @param sCandidateName The given project's name.
      * @return A valid name.
-     * @throws NameRequired if the given {@link Project} got a null name.
-     * @throws NameTooSmall if the given {@link Project} got a name too small.
-     * @throws NameTooLong if the given {@link Project} got a name too long.
+     * @throws NameRequired if the given name is null.
+     * @throws NameTooSmall if the given name  is too small.
+     * @throws NameTooLong if the given name is too long.
      */
     private static String checkName(
         final String sCandidateName)
@@ -123,7 +123,7 @@ public final class ProjectUtils {
      * Used to check a given project's description.
      * @param sCandidateDescription The given project's description.
      * @return A valid description.
-     * @throws DescriptionTooLong if the given {@link Project} got a description
+     * @throws DescriptionTooLong if the given description is too long.
      * too long.
      */
     private static String checkDescription(

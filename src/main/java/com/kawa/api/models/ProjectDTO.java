@@ -1,12 +1,16 @@
-package com.kawa.api.dto;
+package com.kawa.api.models;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * ProjectDTO.
+ * ProjectModel.
  *
  * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
  * @version 0.1.0 hydrogen
  */
-public class ProjectDTO {
+@Document(collection = "projects")
+public final class ProjectDTO {
 
     /**
      * <b>UUID</b>.
@@ -15,6 +19,7 @@ public class ProjectDTO {
      * <hr>
      * @since 0.1.0 hydrogen
      */
+    @Id
     private String uuid;
 
     /**
@@ -36,6 +41,32 @@ public class ProjectDTO {
      * @since 0.1.0 hydrogen
      */
     private String description;
+
+    /**
+     * Constructor.
+     * @since 0.1.0 hydrogen
+     */
+    public ProjectDTO() {
+        super();
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param uuid Initial UUID.
+     * @param name Initial Name.
+     * @param description Initial Description.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public ProjectDTO(
+            final String uuid,
+            final String name,
+            final String description) {
+        this.uuid = uuid;
+        this.name = name;
+        this.description = description;
+    }
 
     /**
      * @return current UUID

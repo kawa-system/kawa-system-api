@@ -2,7 +2,7 @@ package com.kawa.api;
 
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
-import com.kawa.api.models.Project;
+import com.kawa.api.models.ProjectDTO;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -84,12 +84,12 @@ public final class ProjectTests {
      * @param oProject The project to post.
      * @return The response entity.
      */
-    private ResponseEntity<Project> postProject(final Project oProject) {
+    private ResponseEntity<ProjectDTO> postProject(final ProjectDTO oProject) {
         try {
             return this.restTemplate.postForEntity(
                     new URL("http://localhost:" + this.port //$NON-NLS-1$
                             + "/projects").toString(), //$NON-NLS-1$
-                        oProject, Project.class);
+                        oProject, ProjectDTO.class);
         } catch (RestClientException rce) {
             Assertions.fail(rce);
             return null;
@@ -111,13 +111,13 @@ public final class ProjectTests {
     public void testNominalFullConstructor() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
             "   " + DFT_NAME + "   ",
             "   " + DFT_DESC + "   ");
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -149,13 +149,13 @@ public final class ProjectTests {
     public void testNominalMinimalConstructor() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             null,
             "   " + DFT_NAME + "   ",
             null);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -187,7 +187,7 @@ public final class ProjectTests {
     public void testNominalFullSetters() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
             DFT_NAME,
             DFT_DESC);
@@ -195,7 +195,7 @@ public final class ProjectTests {
         oProject.setDescription(SET_DESC);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -227,13 +227,13 @@ public final class ProjectTests {
     public void testUuidInvalid() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             "I AM AN INVALID UUID AND I F@!K U !",
             DFT_NAME,
             null);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -245,7 +245,7 @@ public final class ProjectTests {
     /* @TODO APPEND A NOT NOMINAL TEST CASE FOR ALREADY USED UUID. */
 
     /**
-     * Unit Test used to validate {@link ProjectController#create(Project)}.
+     * Unit Test used to validate {@link ProjectController#create(ProjectDTO)}.
      * Not Nominal Case - Name : Null Case.
      * @since 0.1.0 hydrogen
      */
@@ -254,13 +254,13 @@ public final class ProjectTests {
     public void testNameNull() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             null,
             null,
             null);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -280,13 +280,13 @@ public final class ProjectTests {
     public void testNameTooSmall() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
             ERR_NAME_TOO_SMALL,
             null);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -296,7 +296,7 @@ public final class ProjectTests {
     }
 
     /**
-     * Unit Test used to validate {@link ProjectController#create(Project)}.
+     * Unit Test used to validate {@link ProjectController#create(ProjectDTO)}.
      * Not Nominal Case - Name : Too Long Case.
      * @since 0.1.0 hydrogen
      */
@@ -305,13 +305,13 @@ public final class ProjectTests {
     public void testNameTooLong() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
             ERR_NAME_TOO_LONG,
             null);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -330,13 +330,13 @@ public final class ProjectTests {
     public void testDescriptionTooLong() {
 
         /* Initialize Project. */
-        final Project oProject = new Project(
+        final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
             DFT_NAME,
             ERR_DESC_TOO_LONG);
 
         /* Post Project. */
-        final ResponseEntity<Project> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
