@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
  * Nicolas "Papa Bear" ROLLE</a>
  * @version 0.1.0 hydrogen
  */
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public final class HelloTests extends AKawaTests {
 
     /** HTTP Status Code : Success (200). */

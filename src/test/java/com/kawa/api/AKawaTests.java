@@ -19,8 +19,8 @@ public abstract class AKawaTests {
     protected int port;
 	
     @BeforeAll
-	public void setUp() { }
+	public static void setUp() { }
 	
     @AfterAll
-	public void tearDown() { } 
+	public static void tearDown() { }
 }
