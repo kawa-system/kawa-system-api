@@ -1,11 +1,15 @@
 package com.kawa.api.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * ProjectModel.
  *
  * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
  * @version 0.1.0 hydrogen
  */
+@Document(collection = "projects")
 public final class Project {
 
     /**
@@ -15,7 +19,8 @@ public final class Project {
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    private final String uuid;
+    @Id
+    private String uuid;
 
     /**
      * Short <b>Name</b>.
@@ -37,22 +42,24 @@ public final class Project {
      */
     private String description;
 
+    public Project() {}
+
     /**
      * Constructor.
      *
-     * @param sUuid Initial UUID.
-     * @param sName Initial Name.
-     * @param sDescription Initial Description.
+     * @param uuid Initial UUID.
+     * @param name Initial Name.
+     * @param description Initial Description.
      * <hr>
      * @since 0.1.0 hydrogen
      */
     public Project(
-            final String sUuid,
-            final String sName,
-            final String sDescription) {
-        this.uuid = sUuid;
-        this.name = sName;
-        this.description = sDescription;
+            final String uuid,
+            final String name,
+            final String description) {
+        this.uuid = uuid;
+        this.name = name;
+        this.description = description;
     }
 
     /**
@@ -83,22 +90,31 @@ public final class Project {
     }
 
     /**
-     * @param sName The new short name.
+     * @param uuid The UUID.
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public void setName(final String sName) {
-        this.name = sName;
+    public void setUuid(final String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * @param name The new short name.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    public void setName(final String name) {
+        this.name = name;
     }
 
 
     /**
-     * @param sDescription The new description.
+     * @param description The new description.
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public void setDescription(final String sDescription) {
-        this.description = sDescription;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
 }
