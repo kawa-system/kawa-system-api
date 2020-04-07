@@ -2,7 +2,6 @@ package com.kawa.api.utils;
 
 import com.kawa.api.exceptions.AProjectException.NameTooSmall;
 import com.kawa.api.exceptions.AProjectException.UUIDUsed;
-import com.kawa.api.models.ProjectDTO;
 
 import org.owasp.encoder.Encode;
 
@@ -10,7 +9,6 @@ import java.util.UUID;
 
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
-import com.kawa.api.exceptions.AProjectException;
 import com.kawa.api.exceptions.AProjectException.DescriptionTooLong;
 import com.kawa.api.exceptions.AProjectException.InvalidUUID;
 import com.kawa.api.exceptions.AProjectException.NameRequired;
@@ -44,34 +42,13 @@ public final class ProjectUtils {
     }
 
     /**
-     * Used to check & clean a given project candidate to a creation.
-     * @param oProject The candidate.
-     * @return A valid & clean project.
-     * @throws AProjectException if, at least, one requirement is violated.
-     */
-    public static ProjectDTO checkProjectToCreate(
-        final ProjectDTO oProject)
-        throws AProjectException {
-
-        if (oProject == null) {
-            throw new AProjectException.ProjectRequired();
-        }
-
-        return new ProjectDTO(
-            checkUuidToCreate(oProject.getUuid()),
-            checkName(oProject.getName()),
-            checkDescription(oProject.getDescription()));
-
-    }
-
-    /**
      * Used to check a given project's UUID for creation.
      * @param sCandidateUUID The given project's UUID for creation.
      * @return A valid UUID.
      * @throws InvalidUUID if the given UUID is invalid.
      * @throws UUIDUsed if the given UUID is already used.
      */
-    private static String checkUuidToCreate(
+    public static String checkUuidToCreate(
         final String sCandidateUUID)
         throws InvalidUUID, UUIDUsed {
         final UUID oCandidate;
@@ -100,7 +77,7 @@ public final class ProjectUtils {
      * @throws NameTooSmall if the given name  is too small.
      * @throws NameTooLong if the given name is too long.
      */
-    private static String checkName(
+    public static String checkName(
         final String sCandidateName)
         throws NameRequired, NameTooSmall, NameTooLong {
 
@@ -126,7 +103,7 @@ public final class ProjectUtils {
      * @throws DescriptionTooLong if the given description is too long.
      * too long.
      */
-    private static String checkDescription(
+    public static String checkDescription(
         final String sCandidateDescription)
         throws DescriptionTooLong {
 

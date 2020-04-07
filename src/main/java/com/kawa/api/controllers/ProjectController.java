@@ -3,11 +3,13 @@ package com.kawa.api.controllers;
 import java.util.List;
 
 import com.kawa.api.exceptions.AProjectException;
+import com.kawa.api.exceptions.AProjectException.ProjectRequired;
 import com.kawa.api.models.ProjectDTO;
 import com.kawa.api.repositories.ProjectRepository;
 import com.kawa.api.utils.ProjectUtils;
 
 import org.modelmapper.ModelMapper;
+import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,25 +41,26 @@ public class ProjectController {
     /**
      * Project creation.
      *
-     * @param projectDTO project to create.
+     * @param project project to create.
      * @return The response.
-     * @throws AProjectException
+     * @throws AProjectException if failed to create the project.
      * @since 0.1.0 hydrogen
      */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProjectDTO> create(
-        @RequestBody final ProjectDTO projectDTO)
+    public ResponseEntity<Project> create(
+        @RequestBody final Project project)
         throws AProjectException {
-        ProjectDTO newProject = modelMapper.map(projectDTO, ProjectDTO.class);
-        final ProjectDTO oValidProject;
 
-        /* Check & Clean Project. */
-        oValidProject = ProjectUtils.checkProjectToCreate(newProject);
+        /* Map model from request. */
+        final Project newProject = mapPostedProject(project);
 
-        this.oProjectRepository.save(oValidProject);
+        final ProjectDTO oDto = newProject.toDto();
+        this.modelMapper.map(oDto, ProjectDTO.class);
+        this.oProjectRepository.save(oDto);
 
         /* Return new project as the resource representation. */
-        return ResponseEntity.status(HttpStatus.CREATED).body(oValidProject);
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(newProject);
     }
 
     /**
@@ -70,6 +73,122 @@ public class ProjectController {
     public ResponseEntity<List<ProjectDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.FOUND)
             .body(this.oProjectRepository.findAll());
+    }
+
+    /** Project. */
+    public static final class Project {
+
+        /**
+         * <b>UUID</b>.
+         */
+        private String uuid;
+
+        /**
+         * Short <b>Name</b>.
+         */
+        private String name;
+
+        /**
+         * <b>Description</b>.
+         * @since 0.1.0 hydrogen
+         */
+        private String description;
+
+        /**
+         * Constructor.
+         *
+         * @param sUuid Initial UUID.
+         * @param sName Initial Name.
+         * @param sDescription Initial Description.
+         * <hr>
+         * @since 0.1.0 hydrogen
+         */
+        protected Project(
+            final String sUuid,
+            final String sName,
+            final String sDescription
+        ) {
+            this.uuid = sUuid;
+            this.name = sName;
+            this.description = sDescription;
+        }
+
+        /**
+         * Constructor.
+         * <hr>
+         * @since 0.1.0 hydrogen
+         */
+        protected Project() {
+            super();
+        }
+
+        /**
+         * Constructor.
+         * @param oDTO Initial DTO.
+         */
+        protected Project(final ProjectDTO oDTO) {
+            if (oDTO != null) {
+                this.uuid = Encode.forJavaScript(oDTO.getUuid());
+                this.name = Encode.forJavaScript(oDTO.getName());
+                this.description = Encode.forJavaScript(oDTO.getDescription());
+            }
+        }
+
+        protected ProjectDTO toDto() {
+            return new ProjectDTO(
+                Encode.forJava(this.uuid),
+                Encode.forJava(this.name),
+                Encode.forJava(this.description));
+        }
+
+        /**
+         * @return current UUID
+         * <hr>
+         * @since 0.1.0 hydrogen
+         */
+        public String getUuid() {
+            return this.uuid;
+        }
+
+        /**
+         * @return current short name.
+         * <hr>
+         * @since 0.1.0 hydrogen
+         */
+        public String getName() {
+            return this.name;
+        }
+
+        /**
+         * @return current UUID
+         * <hr>
+         * @since 0.1.0 hydrogen
+         */
+        public String getDescription() {
+            return this.description;
+        }
+
+    }
+
+    /**
+     * Used to check & clean a given project candidate to a creation.
+     * @param oToCheck The project to check.
+     * @return A valid & clean project retrieved from request.
+     * @throws AProjectException if, at least, one requirement is violated.
+     */
+    private static Project mapPostedProject(
+        final Project oToCheck)
+        throws AProjectException {
+
+        if (oToCheck == null) {
+            throw new ProjectRequired();
+        }
+
+        return new Project(
+            ProjectUtils.checkUuidToCreate(oToCheck.getUuid()),
+            ProjectUtils.checkName(oToCheck.getName()),
+            ProjectUtils.checkDescription(oToCheck.getDescription()));
+
     }
 
 }

@@ -1,4 +1,4 @@
-package com.kawa.api;
+package com.kawa.api.suits;
 
 import java.net.URL;
 
