@@ -55,10 +55,9 @@ public final class ProjectController {
         final Project newProject = mapPostedProject(project);
 
         /* Checking if UUID is already used. */
-        if (StringUtils.isNotBlank(project.uuid)) {
-            if (this.oProjectRepository.existsById(project.uuid)) {
-                throw new AProjectException.UUIDUsed(project.uuid);
-            }
+        if (StringUtils.isNotBlank(project.uuid)
+                && this.oProjectRepository.existsById(project.uuid)) {
+            throw new AProjectException.UUIDUsed(project.uuid);
         }
 
         final ProjectDTO oDto = newProject.toDto();
