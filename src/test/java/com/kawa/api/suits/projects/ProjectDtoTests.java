@@ -3,12 +3,9 @@
  */
 package com.kawa.api.suits.projects;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 
 import com.kawa.api.models.ProjectDTO;
 
