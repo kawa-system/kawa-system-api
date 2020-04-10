@@ -1,11 +1,8 @@
 package com.kawa.api.utils;
 
-import com.kawa.api.exceptions.AProjectException.NameTooSmall;
-import com.kawa.api.exceptions.AProjectException.UUIDUsed;
+import java.util.UUID;
 
 import org.owasp.encoder.Encode;
-
-import java.util.UUID;
 
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
@@ -13,6 +10,7 @@ import com.kawa.api.exceptions.AProjectException.DescriptionTooLong;
 import com.kawa.api.exceptions.AProjectException.InvalidUUID;
 import com.kawa.api.exceptions.AProjectException.NameRequired;
 import com.kawa.api.exceptions.AProjectException.NameTooLong;
+import com.kawa.api.exceptions.AProjectException.NameTooSmall;
 
 
 /**
