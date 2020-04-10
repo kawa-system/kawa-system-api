@@ -46,11 +46,10 @@ public final class ProjectUtils {
      * @param sCandidateUUID The given project's UUID for creation.
      * @return A valid UUID.
      * @throws InvalidUUID if the given UUID is invalid.
-     * @throws UUIDUsed if the given UUID is already used.
      */
     public static String checkUuidToCreate(
         final String sCandidateUUID)
-        throws InvalidUUID, UUIDUsed {
+        throws InvalidUUID {
         final UUID oCandidate;
 
         if (sCandidateUUID == null) {
@@ -63,8 +62,6 @@ public final class ProjectUtils {
                 throw new InvalidUUID(sCandidateUUID, iae);
             }
         }
-
-        /* @TODO CHECK IF ALREADY EXISTS. */
 
         return oCandidate.toString();
     }

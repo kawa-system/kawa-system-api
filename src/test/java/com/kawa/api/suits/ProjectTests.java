@@ -331,8 +331,6 @@ public final class ProjectTests {
 
     }
 
-    /* @TODO APPEND A NOT NOMINAL TEST CASE FOR ALREADY USED UUID. */
-
     /**
      * Unit Test used to validate {@link ProjectController#create(ProjectDTO)}.
      * Not Nominal Case - Name : Null Case.
