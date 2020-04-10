@@ -18,6 +18,9 @@ public final class ProjectConstants {
     /** Name : Maximum Size. */
     public static final int NAME_MAXIMUM_SIZE = 40;
 
+    /** Hash Code Multiplier Value. */
+    public static final int HC = 10007;
+
     /**
      * Constructor.
      * <i>As the purpose of this <code>class</code> is to provide static fields
