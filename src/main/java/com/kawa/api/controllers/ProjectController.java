@@ -2,6 +2,7 @@ package com.kawa.api.controllers;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,13 @@ public final class ProjectController {
 
         /* Map model from request. */
         final Project newProject = mapPostedProject(project);
+
+        /* Checking if UUID is already used. */
+        if (StringUtils.isNotBlank(project.uuid)) {
+            if (this.oProjectRepository.existsById(project.uuid)) {
+                throw new AProjectException.UUIDUsed(project.uuid);
+            }
+        }
 
         final ProjectDTO oDto = newProject.toDto();
         this.modelMapper.map(oDto, ProjectDTO.class);

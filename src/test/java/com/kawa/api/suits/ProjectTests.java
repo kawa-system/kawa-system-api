@@ -38,8 +38,6 @@ public final class ProjectTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    /** Default Project's ID. */
-    private static final String DFT_ID = UUID.randomUUID().toString();
     /** Default Project's Name. */
     private static final String DFT_NAME = "default-name"; //$NON-NLS-1$
     /** Default Project's Description. */
@@ -133,11 +131,11 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Nominal Case : Full Constructor")
     public void testNominalFullConstructor() {
 
+        final String sUUID = UUID.randomUUID().toString();
         final int iNbBefore = getNbProjects();
 
         /* Initialize Project. */
-        final ProjectDTO oProject = new ProjectDTO(
-            DFT_ID,
+        final ProjectDTO oProject = new ProjectDTO(sUUID,
             "   " + DFT_NAME + "   ", //$NON-NLS-1$ //$NON-NLS-2$
             "   " + DFT_DESC + "   "); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -160,7 +158,7 @@ public final class ProjectTests {
             "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
-        Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
+        Assertions.assertEquals(sUUID, oResponse.getBody().getUuid(),
             "The UUID of the project MUST be the proposed one."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one."); //$NON-NLS-1$
@@ -219,9 +217,10 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Nominal Case : Setters")
     public void testNominalFullSetters() {
 
+        final String sUUID = UUID.randomUUID().toString();
+
         /* Initialize Project. */
-        final ProjectDTO oProject = new ProjectDTO(
-            DFT_ID,
+        final ProjectDTO oProject = new ProjectDTO(sUUID,
             DFT_NAME,
             DFT_DESC);
         oProject.setName(SET_NAME);
@@ -241,7 +240,7 @@ public final class ProjectTests {
             "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
-        Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
+        Assertions.assertEquals(sUUID, oResponse.getBody().getUuid(),
             "The UUID of the project CANNOT be null."); //$NON-NLS-1$
         Assertions.assertEquals(SET_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one."); //$NON-NLS-1$
@@ -249,6 +248,41 @@ public final class ProjectTests {
             "The description of the project MUST be the " //$NON-NLS-1$
             + "proposed one."); //$NON-NLS-1$
 
+    }
+
+    /**
+     * Unit Test used to validate {@link ProjectController#create(Project)}.
+     * Not Nominal Case - UUID : UUID Used.
+     * @since 0.1.0 hydrogen
+     */
+    @Test
+    @DisplayName("[POST /projects] - Not Nominal Case : UUID Used")
+    public void testUuidUsed() {
+        final String sUUID = UUID.randomUUID().toString();
+
+        /* Post Project. */
+        final ResponseEntity<ProjectDTO> oResponse = postProject(
+                new ProjectDTO(sUUID, DFT_NAME, DFT_DESC));
+
+        Assertions.assertEquals(
+            HttpStatus.CREATED,
+            oResponse.getStatusCode(),
+            "Creation Expected."); //$NON-NLS-1$
+
+        /* Post Project. */
+        final int iNbBefore = getNbProjects();
+        final ResponseEntity<ProjectDTO> oResponse2 = postProject(
+                new ProjectDTO(sUUID, SET_NAME, SET_DESC));
+        final int iNbAfter = getNbProjects();
+
+        Assertions.assertEquals(
+            HttpStatus.BAD_REQUEST,
+            oResponse2.getStatusCode(),
+            "Two projects with the same UUID CANNOT be created."); //$NON-NLS-1$
+
+        Assertions.assertTrue(iNbAfter == iNbBefore,
+                "Two projects with the same UUID CANNOT" //$NON-NLS-1$
+                + " be created."); //$NON-NLS-1$
     }
 
     /**
@@ -334,14 +368,11 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Not Nominal Case - Name : Too Small")
     public void testNameTooSmall() {
 
-        /* Initialize Project. */
-        final ProjectDTO oProject = new ProjectDTO(
-            DFT_ID,
-            ERR_NAME_TOO_SMALL,
-            null);
-
         /* Post Project. */
-        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(
+                new ProjectDTO(UUID.randomUUID().toString(),
+                ERR_NAME_TOO_SMALL,
+                null));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -360,14 +391,11 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Not Nominal Case - Name : Too Long")
     public void testNameTooLong() {
 
-        /* Initialize Project. */
-        final ProjectDTO oProject = new ProjectDTO(
-            DFT_ID,
-            ERR_NAME_TOO_LONG,
-            null);
-
         /* Post Project. */
-        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(
+                new ProjectDTO(UUID.randomUUID().toString(),
+                        ERR_NAME_TOO_LONG,
+                null));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -386,14 +414,11 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Not Nominal Case - Description : Too Long")
     public void testDescriptionTooLong() {
 
-        /* Initialize Project. */
-        final ProjectDTO oProject = new ProjectDTO(
-            DFT_ID,
-            DFT_NAME,
-            ERR_DESC_TOO_LONG);
-
         /* Post Project. */
-        final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectDTO> oResponse = postProject(
+                new ProjectDTO(UUID.randomUUID().toString(),
+                        DFT_NAME,
+                        ERR_DESC_TOO_LONG));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
