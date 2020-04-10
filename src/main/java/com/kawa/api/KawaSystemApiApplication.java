@@ -35,7 +35,7 @@ public class KawaSystemApiApplication {
     }
 
     @Bean
-    public ModelMapper modelMapper() {
+    public static ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
