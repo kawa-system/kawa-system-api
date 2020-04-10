@@ -2,12 +2,6 @@ package com.kawa.api.controllers;
 
 import java.util.List;
 
-import com.kawa.api.exceptions.AProjectException;
-import com.kawa.api.exceptions.AProjectException.ProjectRequired;
-import com.kawa.api.models.ProjectDTO;
-import com.kawa.api.repositories.ProjectRepository;
-import com.kawa.api.utils.ProjectUtils;
-
 import org.modelmapper.ModelMapper;
 import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kawa.api.exceptions.AProjectException;
+import com.kawa.api.models.ProjectDTO;
+import com.kawa.api.repositories.ProjectRepository;
+import com.kawa.api.utils.ProjectUtils;
+
 /**
  * ProjectController.
  *
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/projects")
-public class ProjectController {
+public final class ProjectController {
 
     /** Mapper. */
     @Autowired
@@ -122,18 +121,6 @@ public class ProjectController {
             super();
         }
 
-        /**
-         * Constructor.
-         * @param oDTO Initial DTO.
-         */
-        protected Project(final ProjectDTO oDTO) {
-            if (oDTO != null) {
-                this.uuid = Encode.forJavaScript(oDTO.getUuid());
-                this.name = Encode.forJavaScript(oDTO.getName());
-                this.description = Encode.forJavaScript(oDTO.getDescription());
-            }
-        }
-
         protected ProjectDTO toDto() {
             return new ProjectDTO(
                 Encode.forJava(this.uuid),
@@ -179,10 +166,6 @@ public class ProjectController {
     private static Project mapPostedProject(
         final Project oToCheck)
         throws AProjectException {
-
-        if (oToCheck == null) {
-            throw new ProjectRequired();
-        }
 
         return new Project(
             ProjectUtils.checkUuidToCreate(oToCheck.getUuid()),

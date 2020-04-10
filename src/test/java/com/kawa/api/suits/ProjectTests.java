@@ -2,6 +2,7 @@ package com.kawa.api.suits;
 
 import com.kawa.api.constants.Constants;
 import com.kawa.api.constants.ProjectConstants;
+import com.kawa.api.controllers.ProjectController;
 import com.kawa.api.models.ProjectDTO;
 
 import java.net.MalformedURLException;
@@ -80,6 +81,28 @@ public final class ProjectTests {
     }
 
     /**
+     * @return The number of projects.
+     */
+    private int getNbProjects() {
+        try {
+            ResponseEntity<ProjectDTO[]> response =
+                    this.restTemplate.getForEntity(
+                    new URL("http://localhost:" + this.port //$NON-NLS-1$
+                        + "/projects").toString(), //$NON-NLS-1$
+                    ProjectDTO[].class);
+
+            return response.getBody().length;
+        } catch (RestClientException rce) {
+            Assertions.fail(rce);
+            return -1;
+
+        } catch (MalformedURLException mue) {
+            Assertions.fail(mue);
+            return -1;
+        }
+
+    }
+    /**
      * Used to post a project.
      * @param oProject The project to post.
      * @return The response entity.
@@ -110,6 +133,8 @@ public final class ProjectTests {
     @DisplayName("[POST /projects] - Nominal Case : Full Constructor")
     public void testNominalFullConstructor() {
 
+        final int iNbBefore = getNbProjects();
+
         /* Initialize Project. */
         final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
@@ -124,6 +149,11 @@ public final class ProjectTests {
             HttpStatus.CREATED,
             oResponse.getStatusCode(),
             "A valid project MUST be created in a nominal case."); //$NON-NLS-1$
+
+        final int iNbAfter = getNbProjects();
+
+        Assertions.assertTrue(iNbAfter > iNbBefore,
+                "Number MUST increase."); //$NON-NLS-1$
 
         /* Assert project instance. */
         Assertions.assertNotNull(oResponse.getBody(),
@@ -218,6 +248,26 @@ public final class ProjectTests {
         Assertions.assertEquals(SET_DESC, oResponse.getBody().getDescription(),
             "The description of the project MUST be the " //$NON-NLS-1$
             + "proposed one."); //$NON-NLS-1$
+
+    }
+
+    /**
+     * Unit Test used to validate {@link ProjectController#create(Project)}.
+     * Not Nominal Case - UUID : Invalid Case.
+     * @since 0.1.0 hydrogen
+     */
+    @Test
+    @DisplayName("[POST /projects] - Not Nominal Case : Null")
+    public void testNull() {
+
+        /* Post Project. */
+        final ResponseEntity<ProjectDTO> oResponse = postProject(null);
+
+        Assertions.assertEquals(
+            HttpStatus.UNSUPPORTED_MEDIA_TYPE,
+            oResponse.getStatusCode(),
+            "Invalid UUID MUST generate a \"BAD REQUEST" //$NON-NLS-1$
+                + "\" error."); //$NON-NLS-1$
 
     }
 
