@@ -50,7 +50,7 @@ public final class ProjectTests {
     private static final String SET_DESC = "setter-description"; //$NON-NLS-1$
 
     /** Invalid Name : Too Small. */
-    private static final String ERR_NAME_TOO_SMALL; //$NON-NLS-1$
+    private static final String ERR_NAME_TOO_SMALL; 
     static {
         final StringBuilder sBuilder = new StringBuilder();
         for (int i = 1; i < ProjectConstants.NAME_MINIMUM_SIZE; i++) {
@@ -60,7 +60,7 @@ public final class ProjectTests {
     }
 
     /** Invalid Name : Too long. */
-    private static final String ERR_NAME_TOO_LONG; //$NON-NLS-1$
+    private static final String ERR_NAME_TOO_LONG; 
     static {
         final StringBuilder sBuilder2 = new StringBuilder();
         for (int i = 0; i <= ProjectConstants.NAME_MAXIMUM_SIZE; i++) {
@@ -70,7 +70,7 @@ public final class ProjectTests {
     }
 
     /** Invalid Description : Too long. */
-    private static final String ERR_DESC_TOO_LONG; //$NON-NLS-1$
+    private static final String ERR_DESC_TOO_LONG; 
     static {
         final StringBuilder sBuilder3 = new StringBuilder();
         for (int i = 0; i <= Constants.DEFAULT_MAXIMUM_LENGTH; i++) {
@@ -113,8 +113,8 @@ public final class ProjectTests {
         /* Initialize Project. */
         final ProjectDTO oProject = new ProjectDTO(
             DFT_ID,
-            "   " + DFT_NAME + "   ",
-            "   " + DFT_DESC + "   ");
+            "   " + DFT_NAME + "   ", //$NON-NLS-1$ //$NON-NLS-2$
+            "   " + DFT_DESC + "   "); //$NON-NLS-1$ //$NON-NLS-2$
 
         /* Post Project. */
         final ResponseEntity<ProjectDTO> oResponse = postProject(oProject);
@@ -123,19 +123,20 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.CREATED,
             oResponse.getStatusCode(),
-            "A valid project MUST be created in a nominal case.");
+            "A valid project MUST be created in a nominal case."); //$NON-NLS-1$
 
         /* Assert project instance. */
         Assertions.assertNotNull(oResponse.getBody(),
-            "A created project CANNOT be null.");
+            "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
         Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
-            "The UUID of the project MUST be the proposed one.");
+            "The UUID of the project MUST be the proposed one."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
-            "The name of the project MUST be the proposed one.");
+            "The name of the project MUST be the proposed one."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_DESC, oResponse.getBody().getDescription(),
-            "The description of the project MUST be the proposed one.");
+            "The description of the project MUST be the " //$NON-NLS-1$
+            + "proposed one."); //$NON-NLS-1$
 
     }
 
@@ -151,7 +152,7 @@ public final class ProjectTests {
         /* Initialize Project. */
         final ProjectDTO oProject = new ProjectDTO(
             null,
-            "   " + DFT_NAME + "   ",
+            "   " + DFT_NAME + "   ", //$NON-NLS-1$ //$NON-NLS-2$
             null);
 
         /* Post Project. */
@@ -161,19 +162,21 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.CREATED,
             oResponse.getStatusCode(),
-            "A valid project MUST be created in a nominal case.");
+            "A valid project MUST be created in a nominal case."); //$NON-NLS-1$
 
         /* Assert project instance. */
         Assertions.assertNotNull(oResponse.getBody(),
-            "A created project CANNOT be null.");
+            "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
         Assertions.assertNotNull(oResponse.getBody().getUuid(),
-            "The UUID of the project CANNOT be null.");
+            "The UUID of the project CANNOT be null."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
-            "The name of the project MUST be the proposed one.");
-        Assertions.assertEquals("", oResponse.getBody().getDescription(),
-            "The description of the project MUST be the proposed one.");
+            "The name of the project MUST be the proposed one."); //$NON-NLS-1$
+        Assertions.assertEquals("", //$NON-NLS-1$
+                oResponse.getBody().getDescription(),
+            "The description of the project MUST be the " //$NON-NLS-1$
+            + "proposed one."); //$NON-NLS-1$
 
     }
 
@@ -201,19 +204,20 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.CREATED,
             oResponse.getStatusCode(),
-            "A valid project MUST be created in a nominal case.");
+            "A valid project MUST be created in a nominal case."); //$NON-NLS-1$
 
         /* Assert project instance. */
         Assertions.assertNotNull(oResponse.getBody(),
-            "A created project CANNOT be null.");
+            "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
         Assertions.assertEquals(DFT_ID, oResponse.getBody().getUuid(),
-            "The UUID of the project CANNOT be null.");
+            "The UUID of the project CANNOT be null."); //$NON-NLS-1$
         Assertions.assertEquals(SET_NAME, oResponse.getBody().getName(),
-            "The name of the project MUST be the proposed one.");
+            "The name of the project MUST be the proposed one."); //$NON-NLS-1$
         Assertions.assertEquals(SET_DESC, oResponse.getBody().getDescription(),
-            "The description of the project MUST be the proposed one.");
+            "The description of the project MUST be the " //$NON-NLS-1$
+            + "proposed one."); //$NON-NLS-1$
 
     }
 
@@ -228,7 +232,7 @@ public final class ProjectTests {
 
         /* Initialize Project. */
         final ProjectDTO oProject = new ProjectDTO(
-            "I AM AN INVALID UUID AND I F@!K U !",
+            "I AM AN INVALID UUID AND I F@!K U !", //$NON-NLS-1$
             DFT_NAME,
             null);
 
@@ -238,7 +242,8 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
             oResponse.getStatusCode(),
-            "Invalid UUID MUST generate a \"BAD REQUEST\" error.");
+            "Invalid UUID MUST generate a \"BAD REQUEST" //$NON-NLS-1$
+                + "\" error."); //$NON-NLS-1$
 
     }
 
@@ -265,7 +270,7 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
             oResponse.getStatusCode(),
-            "Null name MUST generate a \"BAD REQUEST\" error.");
+            "Null name MUST generate a \"BAD REQUEST\" error."); //$NON-NLS-1$
 
     }
 
@@ -291,7 +296,8 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
             oResponse.getStatusCode(),
-            "Too small name MUST generate a \"BAD REQUEST\" error.");
+            "Too small name MUST generate a " //$NON-NLS-1$
+                + "\"BAD REQUEST\" error."); //$NON-NLS-1$
 
     }
 
@@ -316,7 +322,8 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
             oResponse.getStatusCode(),
-            "Too long name MUST generate a \"BAD REQUEST\" error.");
+            "Too long name MUST generate a " //$NON-NLS-1$
+                + "\"BAD REQUEST\" error."); //$NON-NLS-1$
 
     }
 
@@ -341,7 +348,8 @@ public final class ProjectTests {
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
             oResponse.getStatusCode(),
-            "Too long description MUST generate a \"BAD REQUEST\" error.");
+            "Too long description MUST generate a " //$NON-NLS-1$
+                    + "\"BAD REQUEST\" error."); //$NON-NLS-1$
 
     }
 
