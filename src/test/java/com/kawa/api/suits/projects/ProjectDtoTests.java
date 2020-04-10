@@ -148,7 +148,6 @@ public final class ProjectDtoTests {
     @SuppressWarnings({ "static-method", "unlikely-arg-type" })
     @Test
     @DisplayName("Constructor / Getters / Setters")
-    @Timeout(unit = TimeUnit.MILLISECONDS, value = 50)
     final void test() {
         /** Create a new "void" instance. */
         final ProjectDTO voidProject = create();
