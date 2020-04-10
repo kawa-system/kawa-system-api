@@ -75,19 +75,19 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
     /**
      * Constructor.
      *
-     * @param uuid Initial UUID.
-     * @param name Initial Name.
-     * @param description Initial Description.
+     * @param sUuid Initial UUID.
+     * @param sName Initial Name.
+     * @param sDescription Initial Description.
      * <hr>
      * @since 0.1.0 hydrogen
      */
     public ProjectDTO(
-            final String uuid,
-            final String name,
-            final String description) {
-        this.uuid = uuid;
-        this.name = name;
-        this.description = description;
+            final String sUuid,
+            final String sName,
+            final String sDescription) {
+        this.uuid = sUuid;
+        this.name = sName;
+        this.description = sDescription;
     }
 
     /**
