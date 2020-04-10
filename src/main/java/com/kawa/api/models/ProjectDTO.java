@@ -1,7 +1,16 @@
 package com.kawa.api.models;
 
+import java.io.Serializable;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.kawa.api.constants.Constants;
+import com.kawa.api.constants.ProjectConstants;
 
 /**
  * ProjectModel.
@@ -10,7 +19,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @version 0.1.0 hydrogen
  */
 @Document(collection = "projects")
-public final class ProjectDTO {
+public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
+
+    /** Serial Version Unique ID. */
+    private static final long serialVersionUID = Constants.SUID;
+
+    /** Hash Code : Initial Value. */
+    private static final int HC_INIT = Constants.HC;
+    /** Hash Code : Multiplier Value. */
+    private static final int HC_MULT = ProjectConstants.HC;
+
+    /** Field Name : UUID. */
+    private static final String FLD_NAM_UUID = "uuid"; //$NON-NLS-1$
+    /** Field Name : Name. */
+    private static final String FLD_NAM_NAME = "name"; //$NON-NLS-1$
 
     /**
      * <b>UUID</b>.
@@ -96,31 +118,66 @@ public final class ProjectDTO {
     }
 
     /**
-     * @param uuid The UUID.
+     * @param sUuid The UUID.
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public void setUuid(final String uuid) {
-        this.uuid = uuid;
+    public void setUuid(final String sUuid) {
+        this.uuid = sUuid;
     }
 
     /**
-     * @param name The new short name.
+     * @param sName The new short name.
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public void setName(final String name) {
-        this.name = name;
+    public void setName(final String sName) {
+        this.name = sName;
     }
 
-
     /**
-     * @param description The new description.
+     * @param sDescription The new description.
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public void setDescription(final String description) {
-        this.description = description;
+    public void setDescription(final String sDescription) {
+        this.description = sDescription;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(HC_INIT, HC_MULT)
+                .append(this.uuid)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof ProjectDTO)) {
+            return false;
+        }
+        return new EqualsBuilder()
+                .append(this.uuid, ((ProjectDTO) o).uuid)
+                .isEquals();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append(FLD_NAM_UUID, this.uuid)
+                .append(FLD_NAM_NAME, this.name)
+                .toString();
+    }
+
+    @Override
+    public int compareTo(final ProjectDTO o) {
+        if (o == null) {
+            return 1;
+        }
+        return StringUtils.compareIgnoreCase(this.name, o.name);
     }
 
 }
