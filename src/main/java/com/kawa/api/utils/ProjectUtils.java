@@ -108,7 +108,7 @@ public final class ProjectUtils {
         throws DescriptionTooLong {
 
         if (sCandidateDescription == null) {
-            return "";
+            return ""; //$NON-NLS-1$
         }
 
         final String sTrimmed = Encode.forJava(sCandidateDescription).trim();
