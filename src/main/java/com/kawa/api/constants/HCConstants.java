@@ -16,7 +16,10 @@ public final class HCConstants {
     /** Hash Code Initial Value. */
     public static final int HC_INIT = 5;
 
-    /** Hash Code Multiplier Value : Rule Interface. */
+    /** Hash Code Multiplier Value - Bean : Project. */
+    public static final int HC_MLT_BEAN_PROJECT = 10007;
+
+    /** Hash Code Multiplier Value - Interface : Rule. */
     public static final int HC_MLT_FAC_RULE = 20011;
 
     /**
