@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kawa.api.suits.projects;
 
 import org.junit.jupiter.api.Assertions;
@@ -75,17 +72,17 @@ public final class ProjectDtoTests {
      * given instance.
      * @param oProject The given instance.
      */
-    private static final void checkSetUuid(
+    private static void checkSetUuid(
             final ProjectDTO oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
-        /** Null Case. */
+        /* Null Case. */
         oProject.setUuid(null);
         Assertions.assertNull(oProject.getUuid(),
                 "UUID MUST be equals to the value used " //$NON-NLS-1$
                 + "through its setter."); //$NON-NLS-1$
-        /** Default Case. */
+        /* Default Case. */
         oProject.setUuid(DFT_ID);
         Assertions.assertEquals(DFT_ID, oProject.getUuid(),
                 "UUID MUST be equals to the value used " //$NON-NLS-1$
@@ -97,17 +94,17 @@ public final class ProjectDtoTests {
      * given instance.
      * @param oProject The given instance.
      */
-    private static final void checkSetName(
+    private static void checkSetName(
             final ProjectDTO oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
-        /** Null Case. */
+        /* Null Case. */
         oProject.setName(null);
         Assertions.assertNull(oProject.getName(),
                 "Name MUST be equals to the value used " //$NON-NLS-1$
                 + "through its setter."); //$NON-NLS-1$
-        /** Default Case. */
+        /* Default Case. */
         oProject.setName(DFT_NAME);
         Assertions.assertEquals(DFT_NAME, oProject.getName(),
                 "Name MUST be equals to the value used " //$NON-NLS-1$
@@ -120,17 +117,17 @@ public final class ProjectDtoTests {
      * given instance.
      * @param oProject The given instance.
      */
-    private static final void checkSetDescription(
+    private static void checkSetDescription(
             final ProjectDTO oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
-        /** Null Case. */
+        /* Null Case. */
         oProject.setDescription(null);
         Assertions.assertNull(oProject.getDescription(),
                 "Description MUST be equals to the value used " //$NON-NLS-1$
                 + "through its setter."); //$NON-NLS-1$
-        /** Default Case. */
+        /* Default Case. */
         oProject.setDescription(DFT_DESC);
         Assertions.assertEquals(DFT_DESC, oProject.getDescription(),
                 "Description MUST be equals to the value used " //$NON-NLS-1$
@@ -145,12 +142,12 @@ public final class ProjectDtoTests {
     @SuppressWarnings({ "static-method", "unlikely-arg-type" })
     @Test
     @DisplayName("Constructor / Getters / Setters")
-    final void test() {
-        /** Create a new "void" instance. */
+    public void test() {
+        /* Create a new "void" instance. */
         final ProjectDTO voidProject = create();
-        /** Create a new "null" instance. */
+        /* Create a new "null" instance. */
         final ProjectDTO nullProject = create(null, null, null);
-        /** Create a new "default" instance. */
+        /* Create a new "default" instance. */
         final ProjectDTO defaultProject = create(DFT_ID, DFT_NAME, DFT_DESC);
 
         Assertions.assertFalse(nullProject.equals(null),
