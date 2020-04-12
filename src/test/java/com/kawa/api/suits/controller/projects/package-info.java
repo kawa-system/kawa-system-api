@@ -8,4 +8,4 @@
  *
  * @since 0.1.0 hydrogen
  */
-package com.kawa.api.suits.projects;
+package com.kawa.api.suits.controller.projects;
