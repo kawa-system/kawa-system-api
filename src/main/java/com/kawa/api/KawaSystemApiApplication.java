@@ -34,6 +34,10 @@ public class KawaSystemApiApplication {
         SpringApplication.run(KawaSystemApiApplication.class, args);
     }
 
+    /**
+     * @return the model mapper.
+     * @since 0.1.0 hydrogen
+     */
     @Bean
     public static ModelMapper modelMapper() {
         return new ModelMapper();
