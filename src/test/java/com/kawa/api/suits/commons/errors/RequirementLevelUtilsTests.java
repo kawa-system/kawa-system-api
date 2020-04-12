@@ -30,7 +30,7 @@ public final class RequirementLevelUtilsTests {
     @SuppressWarnings("static-method")
     @ParameterizedTest
     @CsvFileSource(resources
-            = "/com/kawa/api/suits/commons/errors/"
+            = "/test-set/errors/"
             + "requirement-level-utils-find.csv",
             delimiter = ';',
             numLinesToSkip = 1)
