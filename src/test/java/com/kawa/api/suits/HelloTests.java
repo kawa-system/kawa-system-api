@@ -58,6 +58,7 @@ public final class HelloTests {
     /**
      * Unit Test used to validate {@link HelloController#hello(String)}.
      * <hr>
+     * @throws Exception if failed to load entity.
      * @since 0.1.0 hydrogen
      */
     @Test
@@ -74,6 +75,7 @@ public final class HelloTests {
     /**
      * Unit Test used to validate {@link HelloController#hello(String)}.
      * <hr>
+     * @throws Exception if failed to load entity.
      * @since 0.1.0 hydrogen
      */
     @Test
