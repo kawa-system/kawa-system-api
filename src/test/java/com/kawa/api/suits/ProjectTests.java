@@ -1,10 +1,5 @@
 package com.kawa.api.suits;
 
-import com.kawa.api.constants.Constants;
-import com.kawa.api.constants.ProjectConstants;
-import com.kawa.api.controllers.ProjectController;
-import com.kawa.api.models.ProjectDTO;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
@@ -20,6 +15,10 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
+
+import com.kawa.api.constants.Constants;
+import com.kawa.api.constants.ProjectConstants;
+import com.kawa.api.models.ProjectDTO;
 
 /**
  * Unit Test Class dedicated to check {@link ProjectController}.
@@ -49,7 +48,7 @@ public final class ProjectTests {
     private static final String SET_DESC = "setter-description"; //$NON-NLS-1$
 
     /** Invalid Name : Too Small. */
-    private static final String ERR_NAME_TOO_SMALL; 
+    private static final String ERR_NAME_TOO_SMALL;
     static {
         final StringBuilder sBuilder = new StringBuilder();
         for (int i = 1; i < ProjectConstants.NAME_MINIMUM_SIZE; i++) {
@@ -59,7 +58,7 @@ public final class ProjectTests {
     }
 
     /** Invalid Name : Too long. */
-    private static final String ERR_NAME_TOO_LONG; 
+    private static final String ERR_NAME_TOO_LONG;
     static {
         final StringBuilder sBuilder2 = new StringBuilder();
         for (int i = 0; i <= ProjectConstants.NAME_MAXIMUM_SIZE; i++) {
@@ -69,7 +68,7 @@ public final class ProjectTests {
     }
 
     /** Invalid Description : Too long. */
-    private static final String ERR_DESC_TOO_LONG; 
+    private static final String ERR_DESC_TOO_LONG;
     static {
         final StringBuilder sBuilder3 = new StringBuilder();
         for (int i = 0; i <= Constants.DEFAULT_MAXIMUM_LENGTH; i++) {
