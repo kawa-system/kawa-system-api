@@ -1,21 +1,21 @@
-package com.kawa.api.suits.projects;
+package com.kawa.api.suits.model.projects;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.kawa.api.models.ProjectDTO;
+import com.kawa.api.model.projects.beans.ProjectBean;
 
 /**
  * <b>Project D.T.O.</b> Unit Tests.
  * <br>
  *
- * This <code>class</code> is used to check the {@link ProjectDTO} one.
+ * This <code>class</code> is used to check the {@link ProjectBean} one.
  * @author <a href="https://github.com/old-papa-bear">Nicolas P.B. ROLLE</a>
  * @version 0.1.0 hydrogen
  */
-@DisplayName("[Project] >> [DTO]")
-public final class ProjectDtoTests {
+@DisplayName("Model >> Project >> Bean")
+public final class ProjectBeanTests {
 
     /** Default ID. */
     private static final String DFT_ID = "default-id"; //$NON-NLS-1$
@@ -27,8 +27,8 @@ public final class ProjectDtoTests {
     /**
      * @return a new "void" instance.
      */
-    private static ProjectDTO create() {
-        final ProjectDTO oProject = new ProjectDTO();
+    private static ProjectBean create() {
+        final ProjectBean oProject = new ProjectBean();
 
         /* Attributes MUST be null when instantiate with void constructor. */
         Assertions.assertNull(oProject.getUuid(), "UUID MUST be " //$NON-NLS-1$
@@ -48,11 +48,12 @@ public final class ProjectDtoTests {
      * @param sDescription The description.
      * @return a new instance.
      */
-    private static ProjectDTO create(
+    private static ProjectBean create(
             final String sUUID,
             final String sName,
             final String sDescription) {
-        final ProjectDTO oProject = new ProjectDTO(sUUID, sName, sDescription);
+        final ProjectBean oProject
+            = new ProjectBean(sUUID, sName, sDescription);
 
         Assertions.assertEquals(sUUID, oProject.getUuid(),
                 "UUID MUST be equals to the value used " //$NON-NLS-1$
@@ -68,12 +69,12 @@ public final class ProjectDtoTests {
     }
 
     /**
-     * Used to check the method {@link ProjectDTO#setUuid(String)} of a
+     * Used to check the method {@link ProjectBean#setUuid(String)} of a
      * given instance.
      * @param oProject The given instance.
      */
     private static void checkSetUuid(
-            final ProjectDTO oProject) {
+            final ProjectBean oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
@@ -90,12 +91,12 @@ public final class ProjectDtoTests {
     }
 
     /**
-     * Used to check the method {@link ProjectDTO#setName(String)} of a
+     * Used to check the method {@link ProjectBean#setName(String)} of a
      * given instance.
      * @param oProject The given instance.
      */
     private static void checkSetName(
-            final ProjectDTO oProject) {
+            final ProjectBean oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
@@ -113,12 +114,12 @@ public final class ProjectDtoTests {
     }
 
     /**
-     * Used to check the method {@link ProjectDTO#setName(String)} of a
+     * Used to check the method {@link ProjectBean#setName(String)} of a
      * given instance.
      * @param oProject The given instance.
      */
     private static void checkSetDescription(
-            final ProjectDTO oProject) {
+            final ProjectBean oProject) {
         Assertions.assertNotNull(oProject,
                 "A Project CANNOT be null"); //$NON-NLS-1$
 
@@ -137,18 +138,18 @@ public final class ProjectDtoTests {
 
     /**
      * Test constructor, getter & setter for
-     * {@link com.kawa.api.models.ProjectDTO}.
+     * {@link com.kawa.api.model.projects.beans.ProjectBean}.
      */
     @SuppressWarnings({ "static-method", "unlikely-arg-type" })
     @Test
     @DisplayName("Constructor / Getters / Setters")
     public void test() {
         /* Create a new "void" instance. */
-        final ProjectDTO voidProject = create();
+        final ProjectBean voidProject = create();
         /* Create a new "null" instance. */
-        final ProjectDTO nullProject = create(null, null, null);
+        final ProjectBean nullProject = create(null, null, null);
         /* Create a new "default" instance. */
-        final ProjectDTO defaultProject = create(DFT_ID, DFT_NAME, DFT_DESC);
+        final ProjectBean defaultProject = create(DFT_ID, DFT_NAME, DFT_DESC);
 
         Assertions.assertFalse(nullProject.equals(null),
                 "A project MUST NOT be equals to a null " //$NON-NLS-1$
@@ -165,7 +166,7 @@ public final class ProjectDtoTests {
         Assertions.assertTrue(defaultProject.equals(defaultProject),
                 "A project MUST be equals to himself."); //$NON-NLS-1$
         Assertions.assertTrue(defaultProject.equals(
-                new ProjectDTO(DFT_ID, null,  null)),
+                new ProjectBean(DFT_ID, null,  null)),
                 "A project MUST be equals to another one " //$NON-NLS-1$
                 + "with the same UUID."); //$NON-NLS-1$
         Assertions.assertFalse(defaultProject.equals(DFT_ID),

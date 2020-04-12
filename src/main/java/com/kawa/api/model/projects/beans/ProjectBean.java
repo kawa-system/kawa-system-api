@@ -1,4 +1,4 @@
-package com.kawa.api.models;
+package com.kawa.api.model.projects.beans;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.kawa.api.constants.Constants;
-import com.kawa.api.constants.ProjectConstants;
+import com.kawa.api.constants.HCConstants;
 
 /**
  * ProjectModel.
@@ -19,15 +19,11 @@ import com.kawa.api.constants.ProjectConstants;
  * @version 0.1.0 hydrogen
  */
 @Document(collection = "projects")
-public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
+public final class ProjectBean
+    implements Serializable, Comparable<ProjectBean> {
 
     /** Serial Version Unique ID. */
     private static final long serialVersionUID = Constants.SUID;
-
-    /** Hash Code : Initial Value. */
-    private static final int HC_INIT = Constants.HC;
-    /** Hash Code : Multiplier Value. */
-    private static final int HC_MULT = ProjectConstants.HC;
 
     /** Field Name : UUID. */
     private static final String FLD_NAM_UUID = "uuid"; //$NON-NLS-1$
@@ -68,7 +64,7 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
      * Constructor.
      * @since 0.1.0 hydrogen
      */
-    public ProjectDTO() {
+    public ProjectBean() {
         super();
     }
 
@@ -81,7 +77,7 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
      * <hr>
      * @since 0.1.0 hydrogen
      */
-    public ProjectDTO(
+    public ProjectBean(
             final String sUuid,
             final String sName,
             final String sDescription) {
@@ -91,8 +87,7 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
     }
 
     /**
-     * @return current UUID
-     * <hr>
+     * @return the UUID.
      * @since 0.1.0 hydrogen
      */
     public String getUuid() {
@@ -100,8 +95,7 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
     }
 
     /**
-     * @return current short name.
-     * <hr>
+     * @return the name.
      * @since 0.1.0 hydrogen
      */
     public String getName() {
@@ -109,8 +103,7 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
     }
 
     /**
-     * @return current UUID
-     * <hr>
+     * @return the description.
      * @since 0.1.0 hydrogen
      */
     public String getDescription() {
@@ -119,7 +112,6 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
 
     /**
      * @param sUuid The UUID.
-     * <hr>
      * @since 0.1.0 hydrogen
      */
     public void setUuid(final String sUuid) {
@@ -128,7 +120,6 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
 
     /**
      * @param sName The new short name.
-     * <hr>
      * @since 0.1.0 hydrogen
      */
     public void setName(final String sName) {
@@ -137,7 +128,6 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
 
     /**
      * @param sDescription The new description.
-     * <hr>
      * @since 0.1.0 hydrogen
      */
     public void setDescription(final String sDescription) {
@@ -146,7 +136,9 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(HC_INIT, HC_MULT)
+        return new HashCodeBuilder(
+                HCConstants.HC_INIT,
+                HCConstants.HC_MLT_BEAN_PROJECT)
                 .append(this.uuid)
                 .toHashCode();
     }
@@ -156,11 +148,11 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
         if (o == null) {
             return false;
         }
-        if (!(o instanceof ProjectDTO)) {
+        if (!(o instanceof ProjectBean)) {
             return false;
         }
         return new EqualsBuilder()
-                .append(this.uuid, ((ProjectDTO) o).uuid)
+                .append(this.uuid, ((ProjectBean) o).uuid)
                 .isEquals();
     }
 
@@ -173,11 +165,11 @@ public final class ProjectDTO implements Serializable, Comparable<ProjectDTO> {
     }
 
     @Override
-    public int compareTo(final ProjectDTO o) {
-        if (o == null) {
+    public int compareTo(final ProjectBean oBean) {
+        if (oBean == null) {
             return 1;
         }
-        return StringUtils.compareIgnoreCase(this.name, o.name);
+        return StringUtils.compareIgnoreCase(this.name, oBean.getName());
     }
 
 }
