@@ -19,8 +19,8 @@ import org.springframework.web.client.RestClientException;
 
 import com.kawa.api.commons.errors.abstracts.ABusinessException;
 import com.kawa.api.commons.errors.abstracts.ATechnicalException;
-import com.kawa.api.controller.projects.pojos.ProjectToCreate;
-import com.kawa.api.model.projects.beans.ProjectBean;
+import com.kawa.api.controller.projects.pojos.ProjectGet;
+import com.kawa.api.controller.projects.pojos.ProjectPost;
 import com.kawa.api.model.projects.constants.ProjectConstants;
 import com.kawa.api.model.projects.faces.IProjectFactory;
 import com.kawa.api.model.projects.factories.ProjectFactory;
@@ -51,13 +51,13 @@ public final class ProjectGetCollectionTests {
     /**
      * @return The projects.
      */
-    private ResponseEntity<ProjectBean[]> getProjects() {
+    private ResponseEntity<ProjectGet[]> getProjects() {
         try {
-            ResponseEntity<ProjectBean[]> response =
+            ResponseEntity<ProjectGet[]> response =
                     this.restTemplate.getForEntity(
                     new URL("http://localhost:" + this.port //$NON-NLS-1$
                         + "/projects").toString(), //$NON-NLS-1$
-                    ProjectBean[].class);
+                    ProjectGet[].class);
 
             return response;
         } catch (RestClientException rce) {
@@ -77,13 +77,13 @@ public final class ProjectGetCollectionTests {
      * @param oProject The project to post.
      * @return The response entity.
      */
-    private ResponseEntity<ProjectBean> postProject(
-            final ProjectToCreate oProject) {
+    private ResponseEntity<ProjectGet> postProject(
+            final ProjectPost oProject) {
         try {
             return this.restTemplate.postForEntity(
                     new URL("http://localhost:" + this.port //$NON-NLS-1$
                             + "/projects").toString(), //$NON-NLS-1$
-                        oProject, ProjectBean.class);
+                        oProject, ProjectGet.class);
         } catch (RestClientException rce) {
             Assertions.fail(rce);
             return null;
@@ -103,17 +103,17 @@ public final class ProjectGetCollectionTests {
     @Test
     @DisplayName("Nominal Case")
     public void testOverload() {
-        ResponseEntity<ProjectBean> postResponse;
+        ResponseEntity<ProjectGet> postResponse;
         final List<String> uuidToDelete = new ArrayList<>();
 
         for (int i = 0; i < (2 * ProjectConstants.MAX_NB_PROJECT); i++) {
-            postResponse = postProject(new ProjectToCreate(
+            postResponse = postProject(new ProjectPost(
                     "NAME_" + i, //$NON-NLS-1$
                     "DESCRIPTION_" + i)); //$NON-NLS-1$
-            uuidToDelete.add(postResponse.getBody().getUuid());
+            uuidToDelete.add(postResponse.getBody().getUUID());
         }
 
-        ResponseEntity<ProjectBean[]> response = getProjects();
+        ResponseEntity<ProjectGet[]> response = getProjects();
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -149,12 +149,12 @@ public final class ProjectGetCollectionTests {
     public void testNominal() {
 
         for (int i = 0; i < (ProjectConstants.MAX_NB_PROJECT * 2); i++) {
-            postProject(new ProjectToCreate(
+            postProject(new ProjectPost(
                     "NAME_" + i, //$NON-NLS-1$
                     "DESCRIPTION_" + i)); //$NON-NLS-1$
         }
 
-        final ResponseEntity<ProjectBean[]> response = getProjects();
+        final ResponseEntity<ProjectGet[]> response = getProjects();
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -167,9 +167,9 @@ public final class ProjectGetCollectionTests {
                 response.getBody().length <= ProjectConstants.MAX_NB_PROJECT);
 
         IProjectFactory oFactory = new ProjectFactory(this.projectRepository);
-        for (ProjectBean oBean : response.getBody()) {
+        for (ProjectGet oBean : response.getBody()) {
             try {
-                oFactory.delete(oBean.getUuid());
+                oFactory.delete(oBean.getUUID());
             } catch (ABusinessException e) {
                 Assertions.fail(e);
 

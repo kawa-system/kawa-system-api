@@ -1,5 +1,6 @@
 package com.kawa.api.controller.projects.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kawa.api.commons.errors.abstracts.ABusinessException;
 import com.kawa.api.commons.errors.abstracts.ATechnicalException;
-import com.kawa.api.controller.projects.pojos.ProjectToCreate;
+import com.kawa.api.controller.projects.pojos.ProjectGet;
+import com.kawa.api.controller.projects.pojos.ProjectPost;
 import com.kawa.api.model.projects.faces.IProject;
 import com.kawa.api.model.projects.faces.IProjectFactory;
 import com.kawa.api.model.projects.factories.ProjectFactory;
@@ -44,18 +46,12 @@ public final class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IProject> create(
-        @RequestBody final ProjectToCreate project)
+    public ResponseEntity<ProjectGet> create(
+        @RequestBody final ProjectPost project)
         throws ATechnicalException, ABusinessException {
 
         final IProjectFactory factory
             = new ProjectFactory(this.projectRepository);
-
-        /* Checking if UUID is already used. */
-//        if (StringUtils.isNotBlank(project.uuid)
-//                && this.oProjectRepository.existsById(project.uuid)) {
-//            throw new AProjectException.UUIDUsed(project.uuid);
-//        }
 
         final IProject iProject = factory.create(
                 project.getName(),
@@ -63,7 +59,7 @@ public final class ProjectController {
 
         /* Return new project as the resource representation. */
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(iProject);
+            .body(new ProjectGet(iProject));
     }
 
     /**
@@ -75,13 +71,16 @@ public final class ProjectController {
      * @since 0.1.0 hydrogen
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<IProject>> findAll()
+    public ResponseEntity<List<ProjectGet>> findAll()
             throws ATechnicalException, ABusinessException {
 
         final IProjectFactory factory
             = new ProjectFactory(this.projectRepository);
 
-        final List<IProject> projects = factory.findAll();
+        final List<ProjectGet> projects = new ArrayList<>();
+        for (IProject iProject : factory.findAll()) {
+            projects.add(new ProjectGet(iProject));
+        }
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(projects);

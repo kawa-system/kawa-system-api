@@ -17,7 +17,7 @@ import com.kawa.api.constants.Constants;
  * @author <a href="https://github.com/old-papa-bear">Nicolas "P.B." ROLLE</a>
  * @version 0.1.0 hydrogen
  */
-public abstract class ABusinessException extends AKawaException {
+public abstract class ABusinessException extends Exception {
 
     /** Serial Version Unique ID. */
     private static final long serialVersionUID = Constants.SUID;

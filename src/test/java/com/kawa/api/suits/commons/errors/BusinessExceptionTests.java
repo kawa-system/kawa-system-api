@@ -47,47 +47,47 @@ public final class BusinessExceptionTests {
 
         final TestException test1 = new TestException(MSG, null);
 
-        Assertions.assertEquals(test1.getMessage(), MSG);
+        Assertions.assertEquals(MSG, test1.getMessage());
         Assertions.assertNull(test1.getCause());
         Assertions.assertNotNull(test1.getViolation());
-        Assertions.assertEquals(test1.getViolation(),
-                new RuleBuilder().build());
+        Assertions.assertEquals(new RuleBuilder().build(),
+                test1.getViolation());
 
         final TestException test2 = new TestException(MSG, RULE);
 
-        Assertions.assertEquals(test2.getMessage(), MSG);
+        Assertions.assertEquals(MSG, test2.getMessage());
         Assertions.assertNull(test2.getCause());
         Assertions.assertNotNull(test2.getViolation());
-        Assertions.assertEquals(test2.getViolation(), RULE);
+        Assertions.assertEquals(RULE, test2.getViolation());
 
         final TestException test3 = new TestException(MSG, RULE,
                 new NullPointerException());
 
-        Assertions.assertEquals(test3.getMessage(), MSG);
+        Assertions.assertEquals(MSG, test3.getMessage());
         Assertions.assertNotNull(test3.getCause());
         Assertions.assertNotNull(test3.getViolation());
-        Assertions.assertEquals(test3.getCause().getClass(),
-                NullPointerException.class);
-        Assertions.assertEquals(test3.getViolation(), RULE);
+        Assertions.assertEquals(NullPointerException.class,
+                test3.getCause().getClass());
+        Assertions.assertEquals(RULE, test3.getViolation());
 
         final TestException test4 = new TestException(MSG,
                 CODE, ASSERTION, LEVEL);
 
-        Assertions.assertEquals(test4.getMessage(), MSG);
+        Assertions.assertEquals(MSG, test4.getMessage());
         Assertions.assertNull(test4.getCause());
         Assertions.assertNotNull(test4.getViolation());
-        Assertions.assertEquals(test4.getViolation(), RULE);
+        Assertions.assertEquals(RULE, test4.getViolation());
 
         final TestException test5 = new TestException(MSG,
                 CODE, ASSERTION, LEVEL,
                 new NullPointerException());
 
-        Assertions.assertEquals(test5.getMessage(), MSG);
+        Assertions.assertEquals(MSG, test5.getMessage());
         Assertions.assertNotNull(test5.getCause());
         Assertions.assertNotNull(test5.getViolation());
-        Assertions.assertEquals(test5.getCause().getClass(),
-                NullPointerException.class);
-        Assertions.assertEquals(test5.getViolation(), RULE);
+        Assertions.assertEquals(NullPointerException.class,
+                test5.getCause().getClass());
+        Assertions.assertEquals(RULE, test5.getViolation());
 
     }
 

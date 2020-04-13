@@ -10,7 +10,7 @@ import com.kawa.api.constants.Constants;
  * <br>
  *
  * The purpose of this <code>class</code> is to provide constant(s) dedicated to
- * {@link com.kawa.api.controller.projects.pojos.ProjectToCreate.Project}.
+ * {@link com.kawa.api.controller.projects.pojos.AProject.Project}.
  * <hr>
  *
  * @version 0.1.0 hydrogen

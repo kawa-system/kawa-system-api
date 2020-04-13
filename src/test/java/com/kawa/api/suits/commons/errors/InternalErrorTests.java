@@ -33,16 +33,16 @@ public final class InternalErrorTests {
     public void checkConstructors() {
         final InternalErrorException test1 = new InternalErrorException(MSG_1);
 
-        Assertions.assertEquals(test1.getMessage(), MSG_1);
+        Assertions.assertEquals(MSG_1, test1.getMessage());
         Assertions.assertNull(test1.getCause());
 
         final InternalErrorException test2 = new InternalErrorException(MSG_2,
                 new NullPointerException());
 
-        Assertions.assertEquals(test2.getMessage(), MSG_2);
+        Assertions.assertEquals(MSG_2, test2.getMessage());
         Assertions.assertNotNull(test2.getCause());
-        Assertions.assertEquals(test2.getCause().getClass(),
-                NullPointerException.class);
+        Assertions.assertEquals(NullPointerException.class,
+                test2.getCause().getClass());
 
     }
 

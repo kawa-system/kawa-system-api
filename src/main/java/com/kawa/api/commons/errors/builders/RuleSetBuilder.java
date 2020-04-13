@@ -108,7 +108,7 @@ public final class RuleSetBuilder {
         private static final IRule DEFAULT = new RuleBuilder().build();
 
         /** Rules. */
-        private final Map<String, IRule> rules;
+        private final Map<String, IRule> set;
 
         /**
          * Constructor.
@@ -116,13 +116,13 @@ public final class RuleSetBuilder {
          * @since 0.1.0 hydrogen
          */
         private Rules(final Map<String, IRule> oRules) {
-            this.rules = oRules;
+            this.set = oRules;
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(IRules.class)
-                    .add(SR_SIZE, String.valueOf(this.rules.size()))
+                    .add(SR_SIZE, String.valueOf(this.set.size()))
                     .toString();
         }
 
@@ -132,13 +132,13 @@ public final class RuleSetBuilder {
                 return DEFAULT;
             }
             return ObjectUtils.defaultIfNull(
-                    this.rules.get(sCode),
+                    this.set.get(sCode),
                     DEFAULT);
         }
 
         @Override
         public List<IRule> getAll() {
-            return new ArrayList<>(this.rules.values());
+            return new ArrayList<>(this.set.values());
         }
 
     }

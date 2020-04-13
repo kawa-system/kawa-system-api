@@ -40,8 +40,9 @@ public final class RequirementLevelUtilsTests {
             final String sExpectedDescription) {
         final RequirementLevel oLevel;
 
-        Assertions.assertEquals(RequirementLevelUtils.findLevel(null),
-                RequirementLevel.UNKNOWN);
+        Assertions.assertEquals(
+                RequirementLevel.UNKNOWN,
+                RequirementLevelUtils.findLevel(null));
 
         oLevel =  RequirementLevelUtils.findLevel(sToSearch);
 

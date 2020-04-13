@@ -18,8 +18,8 @@ import org.springframework.web.client.RestClientException;
 import com.kawa.api.commons.errors.abstracts.ABusinessException;
 import com.kawa.api.commons.errors.abstracts.ATechnicalException;
 import com.kawa.api.constants.Constants;
-import com.kawa.api.controller.projects.pojos.ProjectToCreate;
-import com.kawa.api.model.projects.beans.ProjectBean;
+import com.kawa.api.controller.projects.pojos.ProjectPost;
+import com.kawa.api.controller.projects.pojos.ProjectGet;
 import com.kawa.api.model.projects.constants.ProjectConstants;
 import com.kawa.api.model.projects.faces.IProjectFactory;
 import com.kawa.api.model.projects.factories.ProjectFactory;
@@ -87,13 +87,13 @@ public final class ProjectPostTests {
      * @param oProject The project to post.
      * @return The response entity.
      */
-    private ResponseEntity<ProjectBean> postProject(
-            final ProjectToCreate oProject) {
+    private ResponseEntity<ProjectGet> postProject(
+            final ProjectPost oProject) {
         try {
             return this.restTemplate.postForEntity(
                     new URL("http://localhost:" + this.port //$NON-NLS-1$
                             + "/projects").toString(), //$NON-NLS-1$
-                        oProject, ProjectBean.class);
+                        oProject, ProjectGet.class);
         } catch (RestClientException rce) {
             Assertions.fail(rce);
             return null;
@@ -115,12 +115,12 @@ public final class ProjectPostTests {
     public void testNominalFullConstructor() {
 
         /* Initialize Project. */
-        final ProjectToCreate oProject = new ProjectToCreate(
+        final ProjectPost oProject = new ProjectPost(
             "   " + DFT_NAME + "   ", //$NON-NLS-1$ //$NON-NLS-2$
             "   " + DFT_DESC + "   "); //$NON-NLS-1$ //$NON-NLS-2$
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectGet> oResponse = postProject(oProject);
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -133,7 +133,7 @@ public final class ProjectPostTests {
             "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
-        Assertions.assertNotNull(oResponse.getBody().getUuid(),
+        Assertions.assertNotNull(oResponse.getBody().getUUID(),
             "The UUID of the project MUST be the proposed one."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one."); //$NON-NLS-1$
@@ -143,7 +143,7 @@ public final class ProjectPostTests {
 
         IProjectFactory oFactory = new ProjectFactory(this.projectRepository);
         try {
-            oFactory.delete(oResponse.getBody().getUuid());
+            oFactory.delete(oResponse.getBody().getUUID());
         } catch (ABusinessException e) {
             Assertions.fail(e);
 
@@ -163,12 +163,12 @@ public final class ProjectPostTests {
     public void testNominalMinimalConstructor() {
 
         /* Initialize Project. */
-        final ProjectToCreate oProject = new ProjectToCreate(
+        final ProjectPost oProject = new ProjectPost(
             "   " + DFT_NAME + "   ", //$NON-NLS-1$ //$NON-NLS-2$
             null);
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectGet> oResponse = postProject(oProject);
 
         /* Assert expected status code. */
         Assertions.assertEquals(
@@ -181,7 +181,7 @@ public final class ProjectPostTests {
             "A created project CANNOT be null."); //$NON-NLS-1$
 
         /* Assert project's attributes'. */
-        Assertions.assertNotNull(oResponse.getBody().getUuid(),
+        Assertions.assertNotNull(oResponse.getBody().getUUID(),
             "The UUID of the project CANNOT be null."); //$NON-NLS-1$
         Assertions.assertEquals(DFT_NAME, oResponse.getBody().getName(),
             "The name of the project MUST be the proposed one."); //$NON-NLS-1$
@@ -193,7 +193,7 @@ public final class ProjectPostTests {
 
         IProjectFactory oFactory = new ProjectFactory(this.projectRepository);
         try {
-            oFactory.delete(oResponse.getBody().getUuid());
+            oFactory.delete(oResponse.getBody().getUUID());
         } catch (ABusinessException e) {
             Assertions.fail(e);
 
@@ -213,7 +213,7 @@ public final class ProjectPostTests {
     public void testNull() {
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(null);
+        final ResponseEntity<ProjectGet> oResponse = postProject(null);
 
         Assertions.assertEquals(
             HttpStatus.UNSUPPORTED_MEDIA_TYPE,
@@ -224,7 +224,7 @@ public final class ProjectPostTests {
     }
 
     /**
-     * Unit Test used to validate {@link ProjectController#create(ProjectBean)}.
+     * Unit Test used to validate {@link ProjectController#create(ProjectGet)}.
      * Not Nominal Case - Name : Null Case.
      * @since 0.1.0 hydrogen
      */
@@ -233,10 +233,10 @@ public final class ProjectPostTests {
     public void testNameNull() {
 
         /* Initialize Project. */
-        final ProjectToCreate oProject = new ProjectToCreate(null, null);
+        final ProjectPost oProject = new ProjectPost(null, null);
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(oProject);
+        final ResponseEntity<ProjectGet> oResponse = postProject(oProject);
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -256,8 +256,8 @@ public final class ProjectPostTests {
     public void testNameTooSmall() {
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(
-                new ProjectToCreate(ERR_NAME_TOO_SMALL, null));
+        final ResponseEntity<ProjectGet> oResponse = postProject(
+                new ProjectPost(ERR_NAME_TOO_SMALL, null));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -268,7 +268,7 @@ public final class ProjectPostTests {
     }
 
     /**
-     * Unit Test used to validate {@link ProjectController#create(ProjectBean)}.
+     * Unit Test used to validate {@link ProjectController#create(ProjectGet)}.
      * Not Nominal Case - Name : Too Long Case.
      * @since 0.1.0 hydrogen
      */
@@ -277,8 +277,8 @@ public final class ProjectPostTests {
     public void testNameTooLong() {
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(
-                new ProjectToCreate(ERR_NAME_TOO_LONG, null));
+        final ResponseEntity<ProjectGet> oResponse = postProject(
+                new ProjectPost(ERR_NAME_TOO_LONG, null));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -298,8 +298,8 @@ public final class ProjectPostTests {
     public void testDescriptionTooLong() {
 
         /* Post Project. */
-        final ResponseEntity<ProjectBean> oResponse = postProject(
-                new ProjectToCreate(DFT_NAME, ERR_DESC_TOO_LONG));
+        final ResponseEntity<ProjectGet> oResponse = postProject(
+                new ProjectPost(DFT_NAME, ERR_DESC_TOO_LONG));
 
         Assertions.assertEquals(
             HttpStatus.BAD_REQUEST,
@@ -308,6 +308,5 @@ public final class ProjectPostTests {
                     + "\"BAD REQUEST\" error."); //$NON-NLS-1$
 
     }
-
 
 }
