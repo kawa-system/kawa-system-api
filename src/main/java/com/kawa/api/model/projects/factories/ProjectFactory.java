@@ -40,7 +40,6 @@ public final class ProjectFactory implements IProjectFactory {
      * @since 0.1.0 hydrogen
      */
     public ProjectFactory(
-            //final ModelMapper oModelMapper,
             final ProjectRepository oProjectRepository) {
         this.modelMapper = new ModelMapper();
         this.projectRepository = oProjectRepository;
@@ -105,7 +104,7 @@ public final class ProjectFactory implements IProjectFactory {
         final String sCandidateName)
         throws ProjectNameRequired, ProjectNameTooSmall, ProjectNameTooLong {
 
-        if (sCandidateName == null) {
+        if (StringUtils.isBlank(sCandidateName)) {
             throw new ProjectNameRequired();
         }
 

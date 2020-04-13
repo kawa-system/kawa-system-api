@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ import com.kawa.api.model.projects.factories.ProjectFactory;
 import com.kawa.api.model.projects.repositories.ProjectRepository;
 
 /**
- * Unit Test Class dedicated to check {@link ProjectController}.
+ * Unit Test Class dedicated to check Project Controller.
  *
  * @author <a href="https://github.com/fduquesne">Florian DUQUESNE</a>
  * @version 0.1.0 hydrogen
@@ -93,6 +94,21 @@ public final class ProjectGetCollectionTests {
             return null;
         }
 
+    }
+
+    /**
+     * Test null instantiation of a project get form.
+     * <hr>
+     * @since 0.1.0 hydrogen
+     */
+    @SuppressWarnings("static-method")
+    @Test
+    @DisplayName("Void Project Case")
+    public void testProjectGet() {
+        final ProjectGet oNull = new ProjectGet(null);
+        Assertions.assertEquals(StringUtils.EMPTY, oNull.getUUID());
+        Assertions.assertEquals(StringUtils.EMPTY, oNull.getName());
+        Assertions.assertEquals(StringUtils.EMPTY, oNull.getDescription());
     }
 
     /**
@@ -167,6 +183,7 @@ public final class ProjectGetCollectionTests {
                 response.getBody().length <= ProjectConstants.MAX_NB_PROJECT);
 
         IProjectFactory oFactory = new ProjectFactory(this.projectRepository);
+
         for (ProjectGet oBean : response.getBody()) {
             try {
                 oFactory.delete(oBean.getUUID());
