@@ -16,6 +16,9 @@ public final class Constants {
     /** Global Serial Unique Version ID. */
     public static final long SUID = 0x01_00_0001_00000000L;
 
+    /** Hash Code Initial Value. */
+    public static final int HC = 5;
+
     /** Default Maximum length. */
     public static final int DEFAULT_MAXIMUM_LENGTH = 4096;
 

@@ -1,7 +1,10 @@
 package com.kawa.api;
 
+import org.modelmapper.ModelMapper;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,6 +32,11 @@ public class KawaSystemApiApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(KawaSystemApiApplication.class, args);
+    }
+
+    @Bean
+    public static ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 }

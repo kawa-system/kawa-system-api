@@ -43,33 +43,6 @@ public abstract class AProjectException extends Exception {
     }
 
     /**
-     * Error : The Project is required.
-     * <hr>
-     *
-     * @since 0.1.0 hydrogen
-     * @author Nicolas "Papa Bear" ROLLE
-     */
-    @ResponseStatus(
-        code = HttpStatus.BAD_REQUEST,
-        reason = "The project is required !")
-    public static final class ProjectRequired extends AProjectException {
-
-        /** Serial Version Unique ID. */
-        private static final long serialVersionUID = Constants.SUID;
-
-        /** Message Prefix. */
-        private static final String MSG = "The project is required";
-
-        /**
-         * Constructor.
-         * @since 0.1.0 hydrogn
-         */
-        public ProjectRequired() {
-            super(MSG);
-        }
-    }
-
-    /**
      * Error : Project's UUDI is invalid !
      * <hr>
      *
@@ -85,15 +58,15 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG_PFX = "The given UUID [";
+        private static final String MSG_PFX = "The given UUID ["; //$NON-NLS-1$
         /** Message Suffix. */
-        private static final String MSG_SFX =  "] is invalid.";
+        private static final String MSG_SFX =  "] is invalid."; //$NON-NLS-1$
 
         /**
          * Constructor.
          * @param sUUID Given UUID.
          * @param iae The cause.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public InvalidUUID(
             final String sUUID,
@@ -119,14 +92,14 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG_PFX = "The given UUID [";
+        private static final String MSG_PFX = "The given UUID ["; //$NON-NLS-1$
         /** Message Suffix. */
-        private static final String MSG_SFX =  "] is already used.";
+        private static final String MSG_SFX =  "] is already used."; //$NON-NLS-1$
 
         /**
          * Constructor.
          * @param sUUID Given UUID.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public UUIDUsed(final String sUUID) {
             super(MSG_PFX + sUUID + MSG_SFX);
@@ -150,11 +123,11 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG = "The name's of a project is required";
+        private static final String MSG = "The name's of a project is required"; //$NON-NLS-1$
 
         /**
          * Constructor.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public NameRequired() {
             super(MSG);
@@ -177,16 +150,16 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG_PFX = "The name's size [";
+        private static final String MSG_PFX = "The name's size ["; //$NON-NLS-1$
         /** Message Suffix. */
-        private static final String MSG_SFX = "]is too small for a project."
-            + " The minimum expected is [" + ProjectConstants.NAME_MINIMUM_SIZE
-            + "]";
+        private static final String MSG_SFX = "]is too small for a project." //$NON-NLS-1$
+            + " The minimum expected is [" + ProjectConstants.NAME_MINIMUM_SIZE //$NON-NLS-1$
+            + "]"; //$NON-NLS-1$
 
         /**
          * Constructor.
          * @param iInvalidSize The invalid size.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public NameTooSmall(final int iInvalidSize) {
             super(MSG_PFX + iInvalidSize + MSG_SFX);
@@ -209,16 +182,16 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG_PFX = "The name's size [";
+        private static final String MSG_PFX = "The name's size ["; //$NON-NLS-1$
         /** Message Suffix. */
-        private static final String MSG_SFX = "]is too long for a project."
-            + " The maximum expected is [" + ProjectConstants.NAME_MAXIMUM_SIZE
-            + "]";
+        private static final String MSG_SFX = "]is too long for a project." //$NON-NLS-1$
+            + " The maximum expected is [" + ProjectConstants.NAME_MAXIMUM_SIZE //$NON-NLS-1$
+            + "]"; //$NON-NLS-1$
 
         /**
          * Constructor.
          * @param iInvalidSize The invalid size.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public NameTooLong(final int iInvalidSize) {
             super(MSG_PFX + iInvalidSize + MSG_SFX);
@@ -242,16 +215,16 @@ public abstract class AProjectException extends Exception {
         private static final long serialVersionUID = Constants.SUID;
 
         /** Message Prefix. */
-        private static final String MSG_PFX = "The description's size [";
+        private static final String MSG_PFX = "The description's size ["; //$NON-NLS-1$
         /** Message Suffix. */
-        private static final String MSG_SFX = "]is too long for a project."
-            + " The maximum expected is [" + Constants.DEFAULT_MAXIMUM_LENGTH
-            + "]";
+        private static final String MSG_SFX = "]is too long for a project." //$NON-NLS-1$
+            + " The maximum expected is [" + Constants.DEFAULT_MAXIMUM_LENGTH //$NON-NLS-1$
+            + "]"; //$NON-NLS-1$
 
         /**
          * Constructor.
          * @param iInvalidSize The invalid size.
-         * @since 0.1.0 hydrogn
+         * @since 0.1.0 hydrogen
          */
         public DescriptionTooLong(final int iInvalidSize) {
             super(MSG_PFX + iInvalidSize + MSG_SFX);
